@@ -1,60 +1,81 @@
-body {
+/* Reset and base styling */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #121212;
-  color: #f0f0f0;
-  font-family: Arial, sans-serif;
 }
 
-.projects-section {
-  max-width: 1000px;
-  margin: 0 auto;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  color: #111;
+  line-height: 1.6;
+}
+
+/* Skills Section */
+.skills-section {
   padding: 60px 20px;
   text-align: center;
 }
 
-h1 {
+.skills-section h2 {
   font-size: 2.5rem;
   margin-bottom: 40px;
-  color: #ffffff;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.project-card {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.project-card h3 {
-  margin-top: 0;
-  color: #00aaff;
-}
-
-.project-card p {
-  color: #ccc;
-  font-size: 0.95rem;
-}
-
-.project-card a {
-  display: inline-block;
-  margin-top: 10px;
-  color: #00aaff;
-  text-decoration: none;
   font-weight: bold;
 }
 
-.project-card a:hover {
-  text-decoration: underline;
+/* Skills Grid */
+.skills-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Individual Skill Card */
+.skill-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  width: 150px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.skill-card img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.skill-card h3 {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.bar {
+  width: 40px;
+  height: 120px;
+  background: #e0e0e0;
+  border-radius: 20px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.fill {
+  width: 100%;
+  background: #5a4fff;
+  position: absolute;
+  bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.skill-card p {
+  margin-top: 10px;
+  font-weight: bold;
 }
