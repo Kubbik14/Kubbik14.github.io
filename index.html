@@ -180,24 +180,6 @@
       align-items:center;
       text-align: center;
     }
-    
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .btn{
-      display:inline-block;
-      background:linear-gradient(90deg,#ef476f,#ffd166);
-      color:#1b1b1b;
-      padding:8px 14px;
-      border-radius:8px;
-      font-weight:700;
-      text-decoration:none;
-      font-size: 14px;
-    }
 
     /* Mobile-optimized list */
     .features-list {
@@ -363,10 +345,7 @@
     </main>
 
     <footer>
-      <div class="footer-content">
-        <small>© Tvoje jméno • Veselé Vánoce!</small>
-        <a class="btn" href="#" onclick="addMoreSnow()">❄ Více sněhu</a>
-      </div>
+      <small>Veselé Vánoce a šťastný nový rok!</small>
     </footer>
   </div>
 
@@ -389,13 +368,6 @@
       s.style.animationDelay = (Math.random()*-15).toFixed(1) + 's';
       s.innerHTML = '❄';
       document.body.appendChild(s);
-    }
-
-    // Function to add more snowflakes
-    function addMoreSnow() {
-      for(let i=0;i<5;i++){
-        createSnowflake();
-      }
     }
 
     // Touch device detection and optimization
