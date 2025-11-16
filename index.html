@@ -58,7 +58,7 @@
     .greetings{font-size:20px;margin-bottom:12px}
 
     /* Twinkling lights string */
-    .lights{position:absolute;left:0;right:0;top:0;height:56px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .lights{position:fixed;top:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;pointer-events:none;height:auto;padding-top:10px;}
     .bulb{
       width:14px;height:14px;border-radius:50%;margin:0 6px;box-shadow:0 0 8px rgba(255,255,255,0.06);
       animation:blink 3s infinite ease-in-out;
