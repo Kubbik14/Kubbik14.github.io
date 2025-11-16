@@ -1,344 +1,430 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vánoční stránka</title>
-    <style>
-        /* Základní styly */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #0b3b0b, #1a5c1a);
-            color: #fff;
-            line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        /* Vánoční pozadí se sněhem */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            z-index: -1;
-            animation: snow 20s linear infinite;
-        }
-        
-        @keyframes snow {
-            0% { background-position: 0 0, 40px 60px, 130px 270px; }
-            100% { background-position: 0 550px, 40px 610px, 130px 820px; }
-        }
-        
-        /* Hlavička */
-        header {
-            background: linear-gradient(to right, #8B0000, #B22222);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            position: relative;
-            border-bottom: 8px solid #DAA520;
-        }
-        
-        header h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            color: #FFD700;
-            margin-bottom: 0.5rem;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            color: #fff;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Navigace */
-        nav {
-            background-color: #006400;
-            padding: 0.8rem;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        nav li {
-            margin: 0 1rem;
-        }
-        
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        nav a:hover {
-            background-color: #FFD700;
-            color: #8B0000;
-        }
-        
-        /* Hlavní obsah */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        
-        section {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 2px solid #DAA520;
-        }
-        
-        section h2 {
-            color: #FFD700;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #DAA520;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        /* Vánoční ozdoby */
-        .ornament {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            z-index: -1;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .ornament.red {
-            background: radial-gradient(circle at 30% 30%, #ff3333, #8B0000);
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .ornament.gold {
-            background: radial-gradient(circle at 30% 30%, #FFD700, #DAA520);
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-        
-        .ornament.green {
-            background: radial-gradient(circle at 30% 30%, #90EE90, #006400);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 4s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        /* Vánoční stromek */
-        .christmas-tree {
-            position: fixed;
-            bottom: 0;
-            right: 50px;
-            width: 150px;
-            height: 200px;
-            z-index: -1;
-        }
-        
-        .tree-top {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 50px solid transparent;
-            border-right: 50px solid transparent;
-            border-bottom: 80px solid #006400;
-        }
-        
-        .tree-middle {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 70px solid transparent;
-            border-right: 70px solid transparent;
-            border-bottom: 100px solid #0B6623;
-        }
-        
-        .tree-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 90px solid transparent;
-            border-right: 90px solid transparent;
-            border-bottom: 120px solid #0d4d1a;
-        }
-        
-        .tree-trunk {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 30px;
-            background-color: #8B4513;
-        }
-        
-        /* Tlačítka */
-        button, .btn {
-            background: linear-gradient(to bottom, #8B0000, #B22222);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin: 0.5rem;
-        }
-        
-        button:hover, .btn:hover {
-            background: linear-gradient(to bottom, #B22222, #8B0000);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-        
-        /* Patička */
-        footer {
-            background: linear-gradient(to right, #8B0000, #B22222);
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            border-top: 8px solid #DAA520;
-        }
-        
-        footer p {
-            margin: 0.5rem 0;
-        }
-        
-        /* Responsivní design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav li {
-                margin: 0.3rem 0;
-            }
-            
-            .christmas-tree {
-                display: none;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Veselé Vánoce!</title>
+  <style>
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#07102a 0%, #0b2b2f 60%, #07301c 100%);
+      color: #fff;
+      display:flex;align-items:center;justify-content:center;
+      padding:2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Vánoční pozadí se sněhem */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
+      background-size: 550px 550px, 350px 350px, 250px 250px;
+      background-position: 0 0, 40px 60px, 130px 270px;
+      z-index: -1;
+      animation: snow 20s linear infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes snow {
+      0% { background-position: 0 0, 40px 60px, 130px 270px; }
+      100% { background-position: 0 550px, 40px 610px, 130px 820px; }
+    }
+
+    .page{
+      width:100%;max-width:1100px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
+      border-radius:18px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      overflow:hidden;
+      position:relative;
+      border: 1px solid rgba(255,215,0,0.1);
+    }
+
+    header{
+      padding:28px 32px;
+      display:flex;align-items:center;gap:18px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(255,215,0,0.1);
+    }
+    .logo{
+      width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2a9d8f,#e76f51);
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:#fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      animation: rotate 8s linear infinite;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h1{
+      font-size:28px;
+      letter-spacing:0.6px;
+      background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p.lead{opacity:0.9;margin-top:6px}
+
+    main{display:flex;gap:30px;padding:36px}
+
+    /* Left column: tree */
+    .left{flex:1;display:flex;align-items:center;justify-content:center}
+    .tree-wrap{position:relative;width:320px;height:420px}
+
+    /* Simple SVG tree style */
+    .tree{
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+      width:100%;height:100%;display:block
+    }
+
+    /* Right column: content */
+    .right{flex:1;padding:12px 8px;display:flex;flex-direction:column;justify-content:center}
+    .card{
+      background:rgba(255,255,255,0.03);
+      padding:20px;
+      border-radius:12px;
+      border: 1px solid rgba(255,215,0,0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .greetings{
+      font-size:20px;
+      margin-bottom:12px;
+      color: #FFD700;
+    }
+
+    /* Twinkling lights string */
+    .lights{position:absolute;left:0;right:0;top:0;height:56px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .bulb{
+      width:14px;height:14px;border-radius:50%;margin:0 6px;box-shadow:0 0 8px rgba(255,255,255,0.06);
+      animation:blink 3s infinite ease-in-out;
+      transform-origin:center;
+    }
+    .bulb:nth-child(odd){animation-duration:2.6s}
+    .bulb:nth-child(3n){animation-duration:4s}
+    .b1{background:#ff4757;box-shadow:0 0 10px rgba(255,71,87,0.8)}
+    .b2{background:#ffa502;box-shadow:0 0 10px rgba(255,165,2,0.8)}
+    .b3{background:#2ed573;box-shadow:0 0 10px rgba(46,213,115,0.8)}
+    .b4{background:#1e90ff;box-shadow:0 0 10px rgba(30,144,255,0.7)}
+
+    @keyframes blink{
+      0%,100%{opacity:0.4;transform:scale(0.9)}
+      50%{opacity:1;transform:scale(1.15)}
+    }
+
+    /* Snowflakes */
+    .snowflake{
+      position:fixed;top:-10px;pointer-events:none;z-index:40;
+      color:#fff;opacity:0.9;font-size:16px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+      animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite
+    }
+    @keyframes fall{
+      to{transform:translateY(120vh) rotate(360deg)}
+    }
+
+    /* Vánoční ozdoby kolem stránky */
+    .ornament {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    }
+    
+    .ornament.red {
+      background: radial-gradient(circle at 30% 30%, #ff3333, #8B0000);
+      top: 15%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+    
+    .ornament.gold {
+      background: radial-gradient(circle at 30% 30%, #FFD700, #DAA520);
+      top: 70%;
+      right: 8%;
+      animation-delay: 2s;
+    }
+    
+    .ornament.green {
+      background: radial-gradient(circle at 30% 30%, #90EE90, #006400);
+      bottom: 15%;
+      left: 10%;
+      animation-delay: 4s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(180deg); }
+    }
+
+    /* Footer */
+    footer{
+      padding:18px 32px;
+      background:linear-gradient(90deg, rgba(0,0,0,0.04), rgba(255,255,255,0.01));
+      display:flex;justify-content:space-between;align-items:center;
+      border-top: 1px solid rgba(255,215,0,0.1);
+    }
+    .btn{
+      display:inline-block;
+      background:linear-gradient(90deg,#ef476f,#ffd166);
+      color:#1b1b1b;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+      text-decoration:none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    /* Vánoční dárky pod stromkem */
+    .gifts {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 5;
+    }
+    
+    .gift {
+      width: 40px;
+      height: 25px;
+      position: relative;
+    }
+    
+    .gift:nth-child(1) { background: linear-gradient(45deg, #ff4757, #ff6b81); }
+    .gift:nth-child(2) { background: linear-gradient(45deg, #2ed573, #7bed9f); }
+    .gift:nth-child(3) { background: linear-gradient(45deg, #1e90ff, #70a1ff); }
+    
+    .gift::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 15px;
+      height: 10px;
+      background: inherit;
+      border-radius: 2px;
+    }
+    
+    .gift::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 25px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* Responsive */
+    @media (max-width:800px){
+      main{flex-direction:column;padding:24px}
+      .left{order:2}
+      .right{order:1}
+      .ornament { display: none; }
+    }
+    
+    /* Listy ve vánočce */
+    code {
+      background: rgba(255,215,0,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #FFD700;
+    }
+    
+    ul {
+      margin-top:12px;
+      line-height:1.6;
+      opacity:0.95;
+      list-style: none;
+    }
+    
+    ul li {
+      margin-bottom: 8px;
+      padding-left: 24px;
+      position: relative;
+    }
+    
+    ul li::before {
+      content: "🎁";
+      position: absolute;
+      left: 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Vánoční ozdoby -->
-    <div class="ornament red"></div>
-    <div class="ornament gold"></div>
-    <div class="ornament green"></div>
-    
-    <!-- Vánoční stromek -->
-    <div class="christmas-tree">
-        <div class="tree-top"></div>
-        <div class="tree-middle"></div>
-        <div class="tree-bottom"></div>
-        <div class="tree-trunk"></div>
+  <!-- Vánoční ozdoby v pozadí -->
+  <div class="ornament red"></div>
+  <div class="ornament gold"></div>
+  <div class="ornament green"></div>
+
+  <div class="page" role="main">
+    <div class="lights" aria-hidden="true">
+      <!-- decorative light string -->
+      <div class="bulb b1"></div>
+      <div class="bulb b2"></div>
+      <div class="bulb b3"></div>
+      <div class="bulb b4"></div>
+      <div class="bulb b1"></div>
+      <div class="bulb b2"></div>
+      <div class="bulb b3"></div>
+      <div class="bulb b4"></div>
+      <div class="bulb b1"></div>
+      <div class="bulb b2"></div>
+      <div class="bulb b3"></div>
+      <div class="bulb b4"></div>
     </div>
-    
+
     <header>
-        <h1>Veselé Vánoce!</h1>
-        <p>Přejeme vám pohodové svátky plné radosti, klidu a pohody s vašimi blízkými.</p>
+      <div class="logo">🎄</div>
+      <div>
+        <h1>Veselé Vánoce 2024!</h1>
+        <p class="lead">Ať jsou svátky klidné, teplé a plné cukroví a radosti.</p>
+      </div>
     </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#">Domů</a></li>
-            <li><a href="#">Vánoční tradice</a></li>
-            <li><a href="#">Recepty</a></li>
-            <li><a href="#">Dárky</a></li>
-            <li><a href="#">Kontakt</a></li>
-        </ul>
-    </nav>
-    
+
     <main>
-        <section>
-            <h2>Vánoční přání</h2>
-            <p>Vánoce jsou časem, kdy bychom měli zapomenout na všechny starosti a užít si krásné chvíle s rodinou a přáteli. Přejeme vám, ať jsou letošní svátky pro vás ty nejkrásnější a naplněné láskou a vzájemným porozuměním.</p>
-            <p>Nezapomeňte na ty, kteří možná tráví Vánoce sami, a podělte se s nimi o kousek sváteční pohody.</p>
-            <button>Poslat přání</button>
-        </section>
-        
-        <section>
-            <h2>Vánoční tradice</h2>
-            <p>Vánoce jsou spojeny s mnoha krásnými tradicemi, které se předávají z generace na generaci. Mezi nejoblíbenější patří:</p>
-            <ul>
-                <li>Zdobení vánočního stromku</li>
-                <li>Pečení vánočního cukroví</li>
-                <li>Rozsvěcování adventního věnce</li>
-                <li>Zpívání koled</li>
-                <li>Půlnoční mše</li>
-                <li>Nadílka pod stromečkem</li>
-            </ul>
-            <button>Více o tradicích</button>
-        </section>
-        
-        <section>
-            <h2>Vánoční menu</h2>
-            <p>Typické vánoční menu se v každé rodině může lišit, ale některé pokrmy jsou téměř nezbytné:</p>
-            <ul>
-                <li>Kapr nebo jiná ryba</li>
-                <li>Bramborový salát</li>
-                <li>Vánočka</li>
-                <li>Cukroví všech druhů</li>
-                <li>Teplé nápoje jako svařák nebo čaj</li>
-            </ul>
-            <button>Zobrazit recepty</button>
-        </section>
+      <div class="left">
+        <div class="tree-wrap">
+          <!-- Simple svg christmas tree with ornaments and star -->
+          <svg class="tree" viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#2ecc71"/>
+                <stop offset="100%" stop-color="#117a65"/>
+              </linearGradient>
+              <radialGradient id="starGlow">
+                <stop offset="0%" stop-color="#FFD700" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#FFA500" stop-opacity="0.8"/>
+              </radialGradient>
+            </defs>
+            <!-- star with glow -->
+            <g filter="url(#glow)">
+              <polygon points="100,8 110,40 142,40 115,58 126,90 100,70 74,90 85,58 58,40 90,40" fill="url(#starGlow)" stroke="#ffb703" stroke-width="1" />
+            </g>
+            <defs>
+              <filter id="glow" height="300%" width="300%" x="-75%" y="-75%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="glow"/>
+                <feComposite in="SourceGraphic" in2="glow" operator="over"/>
+              </filter>
+            </defs>
+            <!-- tree slices -->
+            <path d="M100 40 L40 110 L160 110 Z" fill="url(#g1)"/>
+            <path d="M100 80 L30 150 L170 150 Z" fill="url(#g1)"/>
+            <path d="M100 120 L20 190 L180 190 Z" fill="url(#g1)"/>
+            <!-- trunk -->
+            <rect x="86" y="190" width="28" height="40" rx="4" fill="#8d6e63"/>
+            <!-- ornaments (animated with CSS via <animateTransform> for subtle bounce) -->
+            <circle cx="80" cy="115" r="5" fill="#ff4757">
+              <animate attributeName="cy" values="115;112;115" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="120" cy="100" r="6" fill="#2ed573">
+              <animate attributeName="cy" values="100;103;100" dur="3.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="70" cy="145" r="5" fill="#1e90ff">
+              <animate attributeName="cy" values="145;142;145" dur="3.6s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="130" cy="145" r="5" fill="#ffa502">
+              <animate attributeName="cy" values="145;148;145" dur="4.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="160" r="6" fill="#ff6b81">
+              <animate attributeName="cy" values="160;157;160" dur="3.8s" repeatCount="indefinite"/>
+            </circle>
+            
+            <!-- Gifts under the tree -->
+            <rect x="60" y="230" width="25" height="15" fill="#ff4757" rx="2"/>
+            <rect x="90" y="230" width="25" height="15" fill="#2ed573" rx="2"/>
+            <rect x="120" y="230" width="25" height="15" fill="#1e90ff" rx="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="card">
+          <div class="greetings">Tuhle stránku jsem vytvořil(a) pro vánoční náladu 🎁</div>
+          <p>Klidná hudba, padající sníh a rozzářené dekorace. Pokud chceš, můžeš si obsah přizpůsobit nebo přidat vlastní texty a odkazy.</p>
+          <ul>
+            <li>Mobile friendly design</li>
+            <li>Animovaná světýlka a sníh</li>
+            <li>Stylová SVG stromeček s dárky</li>
+            <li>Vánoční ozdoby a atmosféra</li>
+          </ul>
+          <p style="margin-top:12px;font-size:14px;opacity:0.9">Tip: ulož tento soubor jako <code>index.html</code> do svého repozitáře a GitHub Pages ho zobrazí.</p>
+        </div>
+      </div>
     </main>
-    
+
     <footer>
-        <p>© 2023 Vánoční stránka | Všechna práva vyhrazena</p>
-        <p>Přejeme vám krásné a pohodové prožití vánočních svátků!</p>
+      <div style="display:flex;gap:12px;align-items:center">
+        <small>© {Tvoje jméno} • Veselé Vánoce 2024!</small>
+      </div>
+      <div>
+        <a class="btn" href="#" id="musicToggle">🎵 Pustit hudbu</a>
+      </div>
     </footer>
+  </div>
+
+  <!-- Snow generation + optional audio control -->
+  <script>
+    // create gentle snow using unicode snowflake characters
+    const flakes = 32;
+    for(let i=0;i<flakes;i++){
+      const s = document.createElement('div');
+      s.className = 'snowflake';
+      s.style.left = Math.random()*100 + 'vw';
+      const size = (Math.random()*10+8).toFixed(1);
+      s.style.fontSize = size + 'px';
+      s.style.opacity = (Math.random()*0.6+0.25).toFixed(2);
+      s.style.animationDuration = (Math.random()*12 + 8).toFixed(1) + 's';
+      s.style.animationDelay = (Math.random()*-20).toFixed(1) + 's';
+      s.innerHTML = '❄';
+      document.body.appendChild(s);
+    }
+
+    // Optional background music (user toggles)
+    const audio = new Audio('https://cdn.pixabay.com/download/audio/2021/12/21/audio_1e4d4b2b90.mp3?filename=christmas-ambience-110803.mp3');
+    audio.loop = true; audio.volume = 0.25;
+    const btn = document.getElementById('musicToggle');
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(audio.paused){
+        audio.play().catch(()=>alert('Pro přehrání hudby klikni ještě jednou (autoplay blokován).'));
+        btn.textContent = '🎵 Vypnout hudbu';
+        btn.style.background = 'linear-gradient(90deg,#2ed573,#7bed9f)';
+      } else {
+        audio.pause();
+        btn.textContent = '🎵 Pustit hudbu';
+        btn.style.background = 'linear-gradient(90deg,#ef476f,#ffd166)';
+      }
+    });
+  </script>
 </body>
 </html>
