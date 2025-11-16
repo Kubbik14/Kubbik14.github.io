@@ -12,286 +12,285 @@
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       background: linear-gradient(180deg,#07102a 0%, #0b2b2f 60%, #07301c 100%);
       color: #fff;
-      display:flex;align-items:center;justify-content:center;
-      padding:2rem;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Vánoční pozadí se sněhem */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 3px),
-        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 4px);
-      background-size: 550px 550px, 350px 350px, 250px 250px;
-      background-position: 0 0, 40px 60px, 130px 270px;
-      z-index: -1;
-      animation: snow 20s linear infinite;
-      pointer-events: none;
-    }
-    
-    @keyframes snow {
-      0% { background-position: 0 0, 40px 60px, 130px 270px; }
-      100% { background-position: 0 550px, 40px 610px, 130px 820px; }
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:1rem;
+      min-height: 100vh;
     }
 
     .page{
-      width:100%;max-width:1100px;
+      width:100%;
+      max-width:500px;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
-      border-radius:18px;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      border-radius:16px;
+      box-shadow: 0 8px 25px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
       overflow:hidden;
       position:relative;
-      border: 1px solid rgba(255,215,0,0.1);
+      margin: 0 auto;
     }
 
     header{
-      padding:28px 32px;
-      display:flex;align-items:center;gap:18px;
+      padding:20px 24px;
+      display:flex;
+      align-items:center;
+      gap:16px;
       background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-bottom: 1px solid rgba(255,215,0,0.1);
-    }
-    .logo{
-      width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2a9d8f,#e76f51);
-      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:#fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      animation: rotate 8s linear infinite;
+      flex-direction: column;
+      text-align: center;
     }
     
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .logo{
+      width:60px;
+      height:60px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#2a9d8f,#e76f51);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:20px;
+      color:#fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
     h1{
-      font-size:28px;
-      letter-spacing:0.6px;
-      background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size:24px;
+      letter-spacing:0.4px;
+      margin-bottom:4px;
     }
-    p.lead{opacity:0.9;margin-top:6px}
+    
+    p.lead{
+      opacity:0.9;
+      margin-top:4px;
+      font-size:14px;
+    }
 
-    main{display:flex;gap:30px;padding:36px}
+    main{
+      display:flex;
+      flex-direction: column;
+      gap:20px;
+      padding:24px;
+    }
 
-    /* Left column: tree */
-    .left{flex:1;display:flex;align-items:center;justify-content:center}
-    .tree-wrap{position:relative;width:320px;height:420px}
+    /* Tree section */
+    .tree-section{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      order: 2;
+    }
+    
+    .tree-wrap{
+      position:relative;
+      width:250px;
+      height:330px;
+    }
 
     /* Simple SVG tree style */
     .tree{
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
-      width:100%;height:100%;display:block
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+      width:100%;
+      height:100%;
+      display:block;
     }
 
-    /* Right column: content */
-    .right{flex:1;padding:12px 8px;display:flex;flex-direction:column;justify-content:center}
+    /* Content section */
+    .content-section{
+      order: 1;
+      padding:8px 4px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    
     .card{
       background:rgba(255,255,255,0.03);
-      padding:20px;
+      padding:18px;
       border-radius:12px;
-      border: 1px solid rgba(255,215,0,0.1);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      text-align: center;
     }
 
     .greetings{
-      font-size:20px;
+      font-size:18px;
       margin-bottom:12px;
-      color: #FFD700;
+      font-weight: 600;
     }
 
     /* Twinkling lights string */
-    .lights{position:absolute;left:0;right:0;top:0;height:56px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .lights{
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+    }
+    
     .bulb{
-      width:14px;height:14px;border-radius:50%;margin:0 6px;box-shadow:0 0 8px rgba(255,255,255,0.06);
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      margin:0 4px;
+      box-shadow:0 0 6px rgba(255,255,255,0.06);
       animation:blink 3s infinite ease-in-out;
       transform-origin:center;
     }
+    
     .bulb:nth-child(odd){animation-duration:2.6s}
     .bulb:nth-child(3n){animation-duration:4s}
-    .b1{background:#ff4757;box-shadow:0 0 10px rgba(255,71,87,0.8)}
-    .b2{background:#ffa502;box-shadow:0 0 10px rgba(255,165,2,0.8)}
-    .b3{background:#2ed573;box-shadow:0 0 10px rgba(46,213,115,0.8)}
-    .b4{background:#1e90ff;box-shadow:0 0 10px rgba(30,144,255,0.7)}
+    .b1{background:#ff4757;box-shadow:0 0 8px rgba(255,71,87,0.8)}
+    .b2{background:#ffa502;box-shadow:0 0 8px rgba(255,165,2,0.8)}
+    .b3{background:#2ed573;box-shadow:0 0 8px rgba(46,213,115,0.8)}
+    .b4{background:#1e90ff;box-shadow:0 0 8px rgba(30,144,255,0.7)}
 
     @keyframes blink{
       0%,100%{opacity:0.4;transform:scale(0.9)}
       50%{opacity:1;transform:scale(1.15)}
     }
 
-    /* Snowflakes */
+    /* Snowflakes - optimized for mobile */
     .snowflake{
-      position:fixed;top:-10px;pointer-events:none;z-index:40;
-      color:#fff;opacity:0.9;font-size:16px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));
-      animation-name:fall;animation-timing-function:linear;animation-iteration-count:infinite
+      position:fixed;
+      top:-10px;
+      pointer-events:none;
+      z-index:40;
+      color:#fff;
+      opacity:0.9;
+      font-size:14px;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+      animation-name:fall;
+      animation-timing-function:linear;
+      animation-iteration-count:infinite;
     }
+    
     @keyframes fall{
       to{transform:translateY(120vh) rotate(360deg)}
     }
 
-    /* Vánoční ozdoby kolem stránky */
-    .ornament {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      z-index: -1;
-      animation: float 6s ease-in-out infinite;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-    }
-    
-    .ornament.red {
-      background: radial-gradient(circle at 30% 30%, #ff3333, #8B0000);
-      top: 15%;
-      left: 5%;
-      animation-delay: 0s;
-    }
-    
-    .ornament.gold {
-      background: radial-gradient(circle at 30% 30%, #FFD700, #DAA520);
-      top: 70%;
-      right: 8%;
-      animation-delay: 2s;
-    }
-    
-    .ornament.green {
-      background: radial-gradient(circle at 30% 30%, #90EE90, #006400);
-      bottom: 15%;
-      left: 10%;
-      animation-delay: 4s;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(180deg); }
-    }
-
     /* Footer */
     footer{
-      padding:18px 32px;
+      padding:16px 24px;
       background:linear-gradient(90deg, rgba(0,0,0,0.04), rgba(255,255,255,0.01));
-      display:flex;justify-content:space-between;align-items:center;
-      border-top: 1px solid rgba(255,215,0,0.1);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align: center;
     }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
     .btn{
       display:inline-block;
       background:linear-gradient(90deg,#ef476f,#ffd166);
       color:#1b1b1b;
-      padding:10px 16px;
-      border-radius:10px;
+      padding:8px 14px;
+      border-radius:8px;
       font-weight:700;
       text-decoration:none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      font-size: 14px;
     }
 
-    /* Vánoční dárky pod stromkem */
-    .gifts {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 5;
-    }
-    
-    .gift {
-      width: 40px;
-      height: 25px;
-      position: relative;
-    }
-    
-    .gift:nth-child(1) { background: linear-gradient(45deg, #ff4757, #ff6b81); }
-    .gift:nth-child(2) { background: linear-gradient(45deg, #2ed573, #7bed9f); }
-    .gift:nth-child(3) { background: linear-gradient(45deg, #1e90ff, #70a1ff); }
-    
-    .gift::before {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 15px;
-      height: 10px;
-      background: inherit;
-      border-radius: 2px;
-    }
-    
-    .gift::after {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 5px;
-      height: 25px;
-      background: rgba(255,255,255,0.5);
-    }
-
-    /* Responsive */
-    @media (max-width:800px){
-      main{flex-direction:column;padding:24px}
-      .left{order:2}
-      .right{order:1}
-      .ornament { display: none; }
-    }
-    
-    /* Listy ve vánočce */
-    code {
-      background: rgba(255,215,0,0.1);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-family: monospace;
-      color: #FFD700;
-    }
-    
-    ul {
+    /* Mobile-optimized list */
+    .features-list {
       margin-top:12px;
-      line-height:1.6;
+      line-height:1.5;
       opacity:0.95;
-      list-style: none;
+      text-align: left;
+      padding-left: 0;
     }
     
-    ul li {
+    .features-list li {
       margin-bottom: 8px;
-      padding-left: 24px;
+      padding-left: 20px;
       position: relative;
+      font-size: 14px;
     }
     
-    ul li::before {
-      content: "🎁";
+    .features-list li:before {
+      content: "✅";
       position: absolute;
       left: 0;
+    }
+
+    /* Touch-friendly improvements */
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+      
+      .page {
+        border-radius: 12px;
+      }
+      
+      header {
+        padding: 16px 20px;
+      }
+      
+      main {
+        padding: 16px;
+        gap: 16px;
+      }
+      
+      .tree-wrap {
+        width: 200px;
+        height: 280px;
+      }
+      
+      .card {
+        padding: 16px;
+      }
+      
+      .greetings {
+        font-size: 16px;
+      }
+      
+      p {
+        font-size: 14px;
+      }
+      
+      footer {
+        padding: 12px 16px;
+      }
+    }
+
+    /* Landscape orientation support */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        padding: 0.5rem;
+        align-items: flex-start;
+      }
+      
+      .page {
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      
+      header {
+        padding: 12px 16px;
+        flex-direction: row;
+        text-align: left;
+      }
+      
+      .tree-wrap {
+        width: 150px;
+        height: 200px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Vánoční ozdoby v pozadí -->
-  <div class="ornament red"></div>
-  <div class="ornament gold"></div>
-  <div class="ornament green"></div>
-
   <div class="page" role="main">
     <div class="lights" aria-hidden="true">
       <!-- decorative light string -->
-      <div class="bulb b1"></div>
-      <div class="bulb b2"></div>
-      <div class="bulb b3"></div>
-      <div class="bulb b4"></div>
       <div class="bulb b1"></div>
       <div class="bulb b2"></div>
       <div class="bulb b3"></div>
@@ -305,13 +304,26 @@
     <header>
       <div class="logo">🎄</div>
       <div>
-        <h1>Veselé Vánoce 2024!</h1>
-        <p class="lead">Ať jsou svátky klidné, teplé a plné cukroví a radosti.</p>
+        <h1>Veselé Vánoce!</h1>
+        <p class="lead">Ať jsou svátky klidné, teplé a plné cukroví.</p>
       </div>
     </header>
 
     <main>
-      <div class="left">
+      <div class="content-section">
+        <div class="card">
+          <div class="greetings">Tuhle stránku jsem vytvořil(a) pro vánoční náladu 🎁</div>
+          <p>Klidná atmosféra, padající sníh a rozzářené dekorace. Pokud chceš, můžeš si obsah přizpůsobit.</p>
+          <ul class="features-list">
+            <li>Optimalizováno pro mobil</li>
+            <li>Animovaná světýlka a sníh</li>
+            <li>Stylová SVG stromeček</li>
+          </ul>
+          <p style="margin-top:12px;font-size:13px;opacity:0.9">Ulož jako <code>index.html</code> a GitHub Pages ho zobrazí.</p>
+        </div>
+      </div>
+
+      <div class="tree-section">
         <div class="tree-wrap">
           <!-- Simple svg christmas tree with ornaments and star -->
           <svg class="tree" viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -320,22 +332,9 @@
                 <stop offset="0%" stop-color="#2ecc71"/>
                 <stop offset="100%" stop-color="#117a65"/>
               </linearGradient>
-              <radialGradient id="starGlow">
-                <stop offset="0%" stop-color="#FFD700" stop-opacity="1"/>
-                <stop offset="100%" stop-color="#FFA500" stop-opacity="0.8"/>
-              </radialGradient>
             </defs>
-            <!-- star with glow -->
-            <g filter="url(#glow)">
-              <polygon points="100,8 110,40 142,40 115,58 126,90 100,70 74,90 85,58 58,40 90,40" fill="url(#starGlow)" stroke="#ffb703" stroke-width="1" />
-            </g>
-            <defs>
-              <filter id="glow" height="300%" width="300%" x="-75%" y="-75%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="glow"/>
-                <feComposite in="SourceGraphic" in2="glow" operator="over"/>
-              </filter>
-            </defs>
+            <!-- star -->
+            <polygon points="100,8 110,40 142,40 115,58 126,90 100,70 74,90 85,58 58,40 90,40" fill="#ffd166" stroke="#ffb703" stroke-width="1" />
             <!-- tree slices -->
             <path d="M100 40 L40 110 L160 110 Z" fill="url(#g1)"/>
             <path d="M100 80 L30 150 L170 150 Z" fill="url(#g1)"/>
@@ -358,73 +357,51 @@
             <circle cx="100" cy="160" r="6" fill="#ff6b81">
               <animate attributeName="cy" values="160;157;160" dur="3.8s" repeatCount="indefinite"/>
             </circle>
-            
-            <!-- Gifts under the tree -->
-            <rect x="60" y="230" width="25" height="15" fill="#ff4757" rx="2"/>
-            <rect x="90" y="230" width="25" height="15" fill="#2ed573" rx="2"/>
-            <rect x="120" y="230" width="25" height="15" fill="#1e90ff" rx="2"/>
           </svg>
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="card">
-          <div class="greetings">Tuhle stránku jsem vytvořil(a) pro vánoční náladu 🎁</div>
-          <p>Klidná hudba, padající sníh a rozzářené dekorace. Pokud chceš, můžeš si obsah přizpůsobit nebo přidat vlastní texty a odkazy.</p>
-          <ul>
-            <li>Mobile friendly design</li>
-            <li>Animovaná světýlka a sníh</li>
-            <li>Stylová SVG stromeček s dárky</li>
-            <li>Vánoční ozdoby a atmosféra</li>
-          </ul>
-          <p style="margin-top:12px;font-size:14px;opacity:0.9">Tip: ulož tento soubor jako <code>index.html</code> do svého repozitáře a GitHub Pages ho zobrazí.</p>
         </div>
       </div>
     </main>
 
     <footer>
-      <div style="display:flex;gap:12px;align-items:center">
-        <small>© {Tvoje jméno} • Veselé Vánoce 2024!</small>
-      </div>
-      <div>
-        <a class="btn" href="#" id="musicToggle">🎵 Pustit hudbu</a>
+      <div class="footer-content">
+        <small>© Tvoje jméno • Veselé Vánoce!</small>
+        <a class="btn" href="#" onclick="addMoreSnow()">❄ Více sněhu</a>
       </div>
     </footer>
   </div>
 
-  <!-- Snow generation + optional audio control -->
+  <!-- Snow generation -->
   <script>
     // create gentle snow using unicode snowflake characters
-    const flakes = 32;
+    const flakes = 20; // Reduced for mobile performance
     for(let i=0;i<flakes;i++){
+      createSnowflake();
+    }
+
+    function createSnowflake() {
       const s = document.createElement('div');
       s.className = 'snowflake';
       s.style.left = Math.random()*100 + 'vw';
-      const size = (Math.random()*10+8).toFixed(1);
+      const size = (Math.random()*8+6).toFixed(1); // Smaller flakes for mobile
       s.style.fontSize = size + 'px';
       s.style.opacity = (Math.random()*0.6+0.25).toFixed(2);
-      s.style.animationDuration = (Math.random()*12 + 8).toFixed(1) + 's';
-      s.style.animationDelay = (Math.random()*-20).toFixed(1) + 's';
+      s.style.animationDuration = (Math.random()*10 + 6).toFixed(1) + 's'; // Faster for mobile
+      s.style.animationDelay = (Math.random()*-15).toFixed(1) + 's';
       s.innerHTML = '❄';
       document.body.appendChild(s);
     }
 
-    // Optional background music (user toggles)
-    const audio = new Audio('https://cdn.pixabay.com/download/audio/2021/12/21/audio_1e4d4b2b90.mp3?filename=christmas-ambience-110803.mp3');
-    audio.loop = true; audio.volume = 0.25;
-    const btn = document.getElementById('musicToggle');
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      if(audio.paused){
-        audio.play().catch(()=>alert('Pro přehrání hudby klikni ještě jednou (autoplay blokován).'));
-        btn.textContent = '🎵 Vypnout hudbu';
-        btn.style.background = 'linear-gradient(90deg,#2ed573,#7bed9f)';
-      } else {
-        audio.pause();
-        btn.textContent = '🎵 Pustit hudbu';
-        btn.style.background = 'linear-gradient(90deg,#ef476f,#ffd166)';
+    // Function to add more snowflakes
+    function addMoreSnow() {
+      for(let i=0;i<5;i++){
+        createSnowflake();
       }
-    });
+    }
+
+    // Touch device detection and optimization
+    if ('ontouchstart' in window) {
+      document.body.classList.add('touch-device');
+    }
   </script>
 </body>
 </html>
