@@ -178,7 +178,7 @@
         <small>© {Tvoje jméno} • Veselé Vánoce!</small>
       </div>
       <div>
-        <a class="btn" href="#" id="musicToggle">Pustit hudbu</a>
+        
       </div>
     </footer>
   </div>
@@ -200,20 +200,6 @@
       document.body.appendChild(s);
     }
 
-    // Optional background music (user toggles)
-    const audio = new Audio('https://cdn.pixabay.com/download/audio/2021/12/21/audio_1e4d4b2b90.mp3?filename=christmas-ambience-110803.mp3');
-    audio.loop = true; audio.volume = 0.25;
-    const btn = document.getElementById('musicToggle');
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      if(audio.paused){
-        audio.play().catch(()=>alert('Pro přehrání hudby klikni ještě jednou (autoplay blokován).'));
-        btn.textContent = 'Vypnout hudbu';
-      } else {
-        audio.pause();
-        btn.textContent = 'Pustit hudbu';
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>
