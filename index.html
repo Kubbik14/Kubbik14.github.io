@@ -1,379 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Veselé Vánoce!</title>
-  <style>
-    /* Reset */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: linear-gradient(180deg,#07102a 0%, #0b2b2f 60%, #07301c 100%);
-      color: #fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:1rem;
-      min-height: 100vh;
-    }
-
-    .page{
-      width:100%;
-      max-width:500px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));
-      border-radius:16px;
-      box-shadow: 0 8px 25px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-      overflow:hidden;
-      position:relative;
-      margin: 0 auto;
-    }
-
-    header{
-      padding:20px 24px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .logo{
-      width:60px;
-      height:60px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#2a9d8f,#e76f51);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:20px;
-      color:#fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    h1{
-      font-size:24px;
-      letter-spacing:0.4px;
-      margin-bottom:4px;
-    }
-    
-    p.lead{
-      opacity:0.9;
-      margin-top:4px;
-      font-size:14px;
-    }
-
-    main{
-      display:flex;
-      flex-direction: column;
-      gap:20px;
-      padding:24px;
-    }
-
-    /* Tree section */
-    .tree-section{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      order: 2;
-    }
-    
-    .tree-wrap{
-      position:relative;
-      width:250px;
-      height:330px;
-    }
-
-    /* Simple SVG tree style */
-    .tree{
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
-      width:100%;
-      height:100%;
-      display:block;
-    }
-
-    /* Content section */
-    .content-section{
-      order: 1;
-      padding:8px 4px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-    
-    .card{
-      background:rgba(255,255,255,0.03);
-      padding:18px;
-      border-radius:12px;
-      text-align: center;
-    }
-
-    .greetings{
-      font-size:18px;
-      margin-bottom:12px;
-      font-weight: 600;
-    }
-
-    /* Twinkling lights string */
-    .lights{
-      position:absolute;
-      left:0;
-      right:0;
-      top:0;
-      height:48px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-    }
-    
-    .bulb{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      margin:0 4px;
-      box-shadow:0 0 6px rgba(255,255,255,0.06);
-      animation:blink 3s infinite ease-in-out;
-      transform-origin:center;
-    }
-    
-    .bulb:nth-child(odd){animation-duration:2.6s}
-    .bulb:nth-child(3n){animation-duration:4s}
-    .b1{background:#ff4757;box-shadow:0 0 8px rgba(255,71,87,0.8)}
-    .b2{background:#ffa502;box-shadow:0 0 8px rgba(255,165,2,0.8)}
-    .b3{background:#2ed573;box-shadow:0 0 8px rgba(46,213,115,0.8)}
-    .b4{background:#1e90ff;box-shadow:0 0 8px rgba(30,144,255,0.7)}
-
-    @keyframes blink{
-      0%,100%{opacity:0.4;transform:scale(0.9)}
-      50%{opacity:1;transform:scale(1.15)}
-    }
-
-    /* Snowflakes - optimized for mobile */
-    .snowflake{
-      position:fixed;
-      top:-10px;
-      pointer-events:none;
-      z-index:40;
-      color:#fff;
-      opacity:0.9;
-      font-size:14px;
-      filter:drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-      animation-name:fall;
-      animation-timing-function:linear;
-      animation-iteration-count:infinite;
-    }
-    
-    @keyframes fall{
-      to{transform:translateY(120vh) rotate(360deg)}
-    }
-
-    /* Footer */
-    footer{
-      padding:16px 24px;
-      background:linear-gradient(90deg, rgba(0,0,0,0.04), rgba(255,255,255,0.01));
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align: center;
-    }
-
-    /* Mobile-optimized list */
-    .features-list {
-      margin-top:12px;
-      line-height:1.5;
-      opacity:0.95;
-      text-align: left;
-      padding-left: 0;
-    }
-    
-    .features-list li {
-      margin-bottom: 8px;
-      padding-left: 20px;
-      position: relative;
-      font-size: 14px;
-    }
-    
-    .features-list li:before {
-      content: "✅";
-      position: absolute;
-      left: 0;
-    }
-
-    /* Touch-friendly improvements */
-    @media (max-width: 480px) {
-      body {
-        padding: 0.5rem;
-      }
-      
-      .page {
-        border-radius: 12px;
-      }
-      
-      header {
-        padding: 16px 20px;
-      }
-      
-      main {
-        padding: 16px;
-        gap: 16px;
-      }
-      
-      .tree-wrap {
-        width: 200px;
-        height: 280px;
-      }
-      
-      .card {
-        padding: 16px;
-      }
-      
-      .greetings {
-        font-size: 16px;
-      }
-      
-      p {
-        font-size: 14px;
-      }
-      
-      footer {
-        padding: 12px 16px;
-      }
-    }
-
-    /* Landscape orientation support */
-    @media (max-height: 500px) and (orientation: landscape) {
-      body {
-        padding: 0.5rem;
-        align-items: flex-start;
-      }
-      
-      .page {
-        max-height: 90vh;
-        overflow-y: auto;
-      }
-      
-      header {
-        padding: 12px 16px;
-        flex-direction: row;
-        text-align: left;
-      }
-      
-      .tree-wrap {
-        width: 150px;
-        height: 200px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Dovednosti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            background-color: #111;
+            border-bottom: 1px solid #333;
+            font-size: 16px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+        nav a:hover {
+            color: #6a0dad;
+        }
+        .container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .username {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .skill {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            width: 100px;
+        }
+        .skill img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .bar-container {
+            width: 60px;
+            height: 150px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 10px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .bar {
+            width: 100%;
+            background-color: #6a0dad;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            transition: height 0.3s;
+        }
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-weight: bold;
+        }
+        .skill-name {
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-  <div class="page" role="main">
-    <div class="lights" aria-hidden="true">
-      <!-- decorative light string -->
-      <div class="bulb b1"></div>
-      <div class="bulb b2"></div>
-      <div class="bulb b3"></div>
-      <div class="bulb b4"></div>
-      <div class="bulb b1"></div>
-      <div class="bulb b2"></div>
-      <div class="bulb b3"></div>
-      <div class="bulb b4"></div>
+    <nav>
+        <a href="#">Domů</a>
+        <a href="#">Dovednosti</a>
+    </nav>
+
+    <div class="container">
+        <div class="username">Jsem kubbik14</div>
+        <h1>Moje dovednosti</h1>
+
+        <div class="skill">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python">
+            <div class="bar-container">
+                <div class="bar" style="height: 15%;"><span class="percentage">15%</span></div>
+            </div>
+            <div class="skill-name">Python</div>
+        </div>
+
+        <div class="skill">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML">
+            <div class="bar-container">
+                <div class="bar" style="height: 10%;"><span class="percentage">10%</span></div>
+            </div>
+            <div class="skill-name">HTML</div>
+        </div>
+
+        <div class="skill">
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java">
+            <div class="bar-container">
+                <div class="bar" style="height: 20%;"><span class="percentage">20%</span></div>
+            </div>
+            <div class="skill-name">Java</div>
+        </div>
+
+        <div class="skill">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Lua-Logo.svg/1024px-Lua-Logo.svg.png" alt="Lua">
+            <div class="bar-container">
+                <div class="bar" style="height: 30%;"><span class="percentage">30%</span></div>
+            </div>
+            <div class="skill-name">Lua</div>
+        </div>
     </div>
-
-    <header>
-      <div class="logo">🎄</div>
-      <div>
-        <h1>Veselé Vánoce!</h1>
-        <p class="lead">Ať jsou svátky klidné, teplé a plné cukroví.</p>
-      </div>
-    </header>
-
-    <main>
-      <div class="content-section">
-        <div class="card">
-          <div class="greetings">Tuhle stránku jsem vytvořil(a) pro vánoční náladu 🎁</div>
-          <p>Klidná atmosféra, padající sníh a rozzářené dekorace. Pokud chceš, můžeš si obsah přizpůsobit.</p>
-          <ul class="features-list">
-            <li>Optimalizováno pro mobil</li>
-            <li>Animovaná světýlka a sníh</li>
-            <li>Stylová SVG stromeček</li>
-          </ul>
-          <p style="margin-top:12px;font-size:13px;opacity:0.9">Ulož jako <code>index.html</code> a GitHub Pages ho zobrazí.</p>
-        </div>
-      </div>
-
-      <div class="tree-section">
-        <div class="tree-wrap">
-          <!-- Simple svg christmas tree with ornaments and star -->
-          <svg class="tree" viewBox="0 0 200 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#2ecc71"/>
-                <stop offset="100%" stop-color="#117a65"/>
-              </linearGradient>
-            </defs>
-            <!-- star -->
-            <polygon points="100,8 110,40 142,40 115,58 126,90 100,70 74,90 85,58 58,40 90,40" fill="#ffd166" stroke="#ffb703" stroke-width="1" />
-            <!-- tree slices -->
-            <path d="M100 40 L40 110 L160 110 Z" fill="url(#g1)"/>
-            <path d="M100 80 L30 150 L170 150 Z" fill="url(#g1)"/>
-            <path d="M100 120 L20 190 L180 190 Z" fill="url(#g1)"/>
-            <!-- trunk -->
-            <rect x="86" y="190" width="28" height="40" rx="4" fill="#8d6e63"/>
-            <!-- ornaments (animated with CSS via <animateTransform> for subtle bounce) -->
-            <circle cx="80" cy="115" r="5" fill="#ff4757">
-              <animate attributeName="cy" values="115;112;115" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="120" cy="100" r="6" fill="#2ed573">
-              <animate attributeName="cy" values="100;103;100" dur="3.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="70" cy="145" r="5" fill="#1e90ff">
-              <animate attributeName="cy" values="145;142;145" dur="3.6s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="130" cy="145" r="5" fill="#ffa502">
-              <animate attributeName="cy" values="145;148;145" dur="4.2s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="160" r="6" fill="#ff6b81">
-              <animate attributeName="cy" values="160;157;160" dur="3.8s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
-        </div>
-      </div>
-    </main>
-
-    <footer>
-      <small>Veselé Vánoce a šťastný nový rok!</small>
-    </footer>
-  </div>
-
-  <!-- Snow generation -->
-  <script>
-    // create gentle snow using unicode snowflake characters
-    const flakes = 20; // Reduced for mobile performance
-    for(let i=0;i<flakes;i++){
-      createSnowflake();
-    }
-
-    function createSnowflake() {
-      const s = document.createElement('div');
-      s.className = 'snowflake';
-      s.style.left = Math.random()*100 + 'vw';
-      const size = (Math.random()*8+6).toFixed(1); // Smaller flakes for mobile
-      s.style.fontSize = size + 'px';
-      s.style.opacity = (Math.random()*0.6+0.25).toFixed(2);
-      s.style.animationDuration = (Math.random()*10 + 6).toFixed(1) + 's'; // Faster for mobile
-      s.style.animationDelay = (Math.random()*-15).toFixed(1) + 's';
-      s.innerHTML = '❄';
-      document.body.appendChild(s);
-    }
-
-    // Touch device detection and optimization
-    if ('ontouchstart' in window) {
-      document.body.classList.add('touch-device');
-    }
-  </script>
 </body>
 </html>
