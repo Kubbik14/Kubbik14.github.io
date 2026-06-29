@@ -1,3 +1,6 @@
+/* =========================
+   BASE RESET
+========================= */
 *{
 margin:0;
 padding:0;
@@ -11,7 +14,9 @@ background:#05060a;
 color:white;
 }
 
-/* LOADER */
+/* =========================
+   LOADER
+========================= */
 #loader{
 position:fixed;
 inset:0;
@@ -46,20 +51,29 @@ animation:load 2s infinite;
 100%{transform:translateX(200%);}
 }
 
-/* SCREENS */
+/* =========================
+   SCREENS (FIXED - SINGLE SOURCE OF TRUTH)
+========================= */
 .screen{
 position:absolute;
 inset:0;
 display:none;
 justify-content:center;
 align-items:center;
+opacity:0;
+transform:scale(1.05);
+transition:opacity 0.8s ease, transform 0.8s ease;
 }
 
 .screen.active{
 display:flex;
+opacity:1;
+transform:scale(1);
 }
 
-/* GLASS EFFECT */
+/* =========================
+   GLASS UI (APPLE STYLE)
+========================= */
 .glass{
 background:rgba(255,255,255,0.06);
 backdrop-filter:blur(30px);
@@ -69,12 +83,17 @@ box-shadow:0 0 80px rgba(0,0,0,0.5);
 text-align:center;
 }
 
+/* =========================
+   CENTER UI
+========================= */
 .center{
 position:absolute;
 z-index:10;
 }
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 button{
 margin-top:20px;
 padding:12px 25px;
@@ -90,7 +109,9 @@ button:hover{
 transform:scale(1.05);
 }
 
-/* CURSOR */
+/* =========================
+   CURSOR
+========================= */
 #cursor{
 position:fixed;
 width:20px;
@@ -103,8 +124,9 @@ transform:translate(-50%,-50%);
 z-index:1000;
 }
 
-/* ===== APPLE BACKGROUND LAYER ===== */
-
+/* =========================
+   BACKGROUND LAYERS
+========================= */
 #bg, #fx{
 position:fixed;
 inset:0;
@@ -112,7 +134,15 @@ width:100%;
 height:100%;
 }
 
-/* gradient mesh background */
+#three-container{
+position:fixed;
+inset:0;
+z-index:-2;
+}
+
+/* =========================
+   APPLE GRADIENT MESH
+========================= */
 body::before{
 content:"";
 position:fixed;
@@ -121,7 +151,7 @@ background:
 radial-gradient(circle at 20% 30%, #ff4fd8, transparent 40%),
 radial-gradient(circle at 80% 40%, #4fd1ff, transparent 40%),
 radial-gradient(circle at 50% 80%, #9b5cff, transparent 40%);
-filter: blur(60px);
+filter: blur(50px);
 animation:mesh 10s ease-in-out infinite;
 z-index:-3;
 }
@@ -132,41 +162,9 @@ z-index:-3;
 100%{transform:translate(0,0) scale(1);}
 }
 
-/* soft floating glow particles (CSS fallback) */
-.glow{
-position:absolute;
-width:8px;
-height:8px;
-border-radius:50%;
-background:white;
-opacity:0.4;
-filter:blur(2px);
-animation:float 8s linear infinite;
-}
-
-@keyframes float{
-0%{transform:translateY(100vh) scale(0.5);}
-100%{transform:translateY(-10vh) scale(1.2);}
-}
-
-/* smooth screen transitions */
-.screen{
-transition:opacity 0.8s ease, transform 0.8s ease;
-transform:scale(1.05);
-opacity:0;
-}
-
-.screen.active{
-opacity:1;
-transform:scale(1);
-}
-
-#three-container{
-position:fixed;
-inset:0;
-z-index:-2;
-}
-
+/* =========================
+   FLOWERS
+========================= */
 svg.flower{
 position:fixed;
 width:60px;
