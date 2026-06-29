@@ -1,9 +1,9 @@
 /* =========================
-   SAFE APPLE EMOTION ENGINE
-   v2 (NO BUG VERSION)
+   APPLE EMOTION ENGINE
+   NO LOADER VERSION
 ========================= */
 
-/* ========= SAFE DOM ========= */
+/* ========= SAFE SELECTOR ========= */
 const $ = (id) => document.getElementById(id);
 
 /* ========= STATE ========= */
@@ -16,27 +16,11 @@ function save(){
     localStorage.setItem("stats", JSON.stringify(stats));
 }
 
-/* ========= LOADER SAFE KILL ========= */
-function hideLoader(){
-    const loader = $("loader");
-    if(!loader) return;
-
-    loader.style.transition = "0.8s ease";
-    loader.style.opacity = "0";
-
-    setTimeout(()=>loader.remove(), 800);
-}
-
-window.addEventListener("load", () => {
-    setTimeout(hideLoader, 600);
-});
-
 /* ========= CURSOR ========= */
 const cursor = $("cursor");
 
 window.addEventListener("mousemove",(e)=>{
     if(!cursor) return;
-
     cursor.style.left = e.clientX + "px";
     cursor.style.top = e.clientY + "px";
 });
@@ -115,7 +99,7 @@ window.addEventListener("mousemove",(e)=>{
     spawn(e.clientX, e.clientY, "white");
 });
 
-/* ========= MAIN LOOP ========= */
+/* ========= ANIMATION LOOP ========= */
 function animate(){
     if(!ctx) return;
 
@@ -164,13 +148,7 @@ function pulse(){
     }
 }
 
-/* ========= LOCAL TIME TRACK ========= */
-setInterval(()=>{
-    stats.timeAlive = Date.now() - stats.start;
-    save();
-}, 2000);
-
-/* ========= FLOWERS SAFE ========= */
+/* ========= FLOWERS ========= */
 function createFlower(){
     const div = document.createElement("div");
 
@@ -192,12 +170,12 @@ function createFlower(){
     setTimeout(()=>div.remove(), 12000);
 }
 
-/* limited spawn */
+/* light decoration */
 for(let i=0;i<5;i++){
     createFlower();
 }
 
-/* ========= SCROLL EFFECT SAFE ========= */
+/* ========= SCROLL EFFECT ========= */
 let scrollTimer;
 
 window.addEventListener("wheel",(e)=>{
@@ -212,7 +190,7 @@ window.addEventListener("wheel",(e)=>{
     },100);
 });
 
-/* ========= MUSIC SAFE ========= */
+/* ========= MUSIC ========= */
 let musicStarted = false;
 
 function fadeIn(){
@@ -240,10 +218,5 @@ function fadeIn(){
 
 window.addEventListener("click", fadeIn, { once:true });
 
-/* ========= GLOBAL SAFE SAVE ========= */
+/* ========= SAVE ========= */
 window.addEventListener("beforeunload", save);
-
-/* ========= SAFETY NET (NO WHITE SCREEN EVER) ========= */
-window.onerror = function(){
-    hideLoader();
-};
