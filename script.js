@@ -1,141 +1,135 @@
-const canvas = document.getElementById("fx");
-const ctx = canvas.getContext("2d");
+const bg = document.getElementById("bg");
+const fx = document.getElementById("fx");
 
-const stars = document.getElementById("stars");
-const sctx = stars.getContext("2d");
+const b = bg.getContext("2d");
+const f = fx.getContext("2d");
 
-let w = window.innerWidth;
-let h = window.innerHeight;
+let w,h;
+function resize(){
+w = innerWidth;
+h = innerHeight;
+bg.width = fx.width = w;
+bg.height = fx.height = h;
+}
+resize();
+window.onresize = resize;
 
-canvas.width = w;
-canvas.height = h;
-stars.width = w;
-stars.height = h;
-
-window.onresize = () => {
-w = window.innerWidth;
-h = window.innerHeight;
-canvas.width = w;
-canvas.height = h;
-stars.width = w;
-stars.height = h;
-};
-
-let count = 0;
+let energy = 0;
 
 const messages = [
-"Jsi přesně tam, kde máš být.",
-"Každá sekunda je nový začátek.",
-"Svět potřebuje tvoji energii.",
-"Nic není ztracené.",
-"Tohle je tvoje chvíle.",
-"Jsi silnější než chaos.",
-"Klid je taky síla."
+"Ty nejsi náhoda.",
+"Každý okamžik se přepisuje.",
+"Realita reaguje na tvoji energii.",
+"Teď se něco mění.",
+"Tvoje existence má váhu.",
+"Všechno je propojené."
 ];
 
-// typing effect
-let msgIndex = 0;
-let charIndex = 0;
+// TEXT ENGINE
+let mi = 0;
+let ci = 0;
 
 function type(){
-const text = document.getElementById("text");
-const msg = messages[msgIndex];
+const el = document.getElementById("text");
+let msg = messages[mi];
 
-text.innerHTML = msg.slice(0,charIndex);
-
-charIndex++;
-
-if(charIndex <= msg.length){
+el.innerHTML = msg.slice(0,ci++);
+if(ci <= msg.length){
 requestAnimationFrame(type);
 }else{
 setTimeout(()=>{
-charIndex = 0;
-msgIndex = (msgIndex+1)%messages.length;
+ci = 0;
+mi = (mi+1)%messages.length;
 type();
-},2000);
+},1200);
 }
 }
 type();
 
-// stars background
-const starArray = [];
-for(let i=0;i<150;i++){
-starArray.push({
+// STARS
+let stars = Array.from({length:200},()=>({
 x:Math.random()*w,
 y:Math.random()*h,
-r:Math.random()*1.5
-});
+z:Math.random()*3
+}));
+
+function drawBg(){
+b.clearRect(0,0,w,h);
+
+for(let s of stars){
+b.fillStyle = "white";
+b.globalAlpha = 1 - s.z/3;
+b.beginPath();
+b.arc(s.x,s.y,s.z,0,Math.PI*2);
+b.fill();
+
+s.y += 0.3 + s.z*0.2;
+
+if(s.y > h){
+s.y = 0;
+s.x = Math.random()*w;
+}
 }
 
-function drawStars(){
-sctx.clearRect(0,0,w,h);
-sctx.fillStyle="white";
-
-for(let s of starArray){
-sctx.beginPath();
-sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-sctx.fill();
-
-s.y += 0.2;
-if(s.y>h){
-s.y=0;
-s.x=Math.random()*w;
+requestAnimationFrame(drawBg);
 }
-}
+drawBg();
 
-requestAnimationFrame(drawStars);
-}
-drawStars();
-
-// particles
+// PARTICLE GOD SYSTEM
 let particles = [];
 
-function boom(){
-count++;
-document.getElementById("count").innerText = count;
+function pulse(){
+energy++;
+document.getElementById("count").innerText = energy;
 
-document.getElementById("clickSound").play();
+document.getElementById("click").play();
 
-for(let i=0;i<80;i++){
+// BIG BURST
+for(let i=0;i<120;i++){
 particles.push({
 x:w/2,
 y:h/2,
-vx:(Math.random()-0.5)*8,
-vy:(Math.random()-0.5)*8,
-life:100
+vx:(Math.random()-0.5)*12,
+vy:(Math.random()-0.5)*12,
+life:120,
+color:`hsl(${Math.random()*360},100%,60%)`
 });
 }
 }
 
-function update(){
-ctx.clearRect(0,0,w,h);
+// MOUSE ENERGY FIELD
+window.addEventListener("mousemove",(e)=>{
+for(let i=0;i<3;i++){
+particles.push({
+x:e.clientX,
+y:e.clientY,
+vx:(Math.random()-0.5)*3,
+vy:(Math.random()-0.5)*3,
+life:40,
+color:"white"
+});
+}
+});
+
+// LOOP
+function loop(){
+f.clearRect(0,0,w,h);
 
 for(let p of particles){
 p.x += p.vx;
 p.y += p.vy;
 p.life--;
 
-ctx.fillStyle = `rgba(255,100,150,${p.life/100})`;
-ctx.beginPath();
-ctx.arc(p.x,p.y,3,0,Math.PI*2);
-ctx.fill();
+f.globalAlpha = p.life/120;
+f.fillStyle = p.color;
+
+f.beginPath();
+f.arc(p.x,p.y,3,0,Math.PI*2);
+f.fill();
 }
 
 particles = particles.filter(p=>p.life>0);
 
-requestAnimationFrame(update);
+requestAnimationFrame(loop);
 }
-update();
-
-// mouse aura
-window.addEventListener("mousemove",(e)=>{
-for(let i=0;i<2;i++){
-particles.push({
-x:e.clientX,
-y:e.clientY,
-vx:(Math.random()-0.5)*2,
-vy:(Math.random()-0.5)*2,
-life:30
-});
-}
-});
+loop();
