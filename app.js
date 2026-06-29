@@ -1,7 +1,10 @@
 /* =========================
-   APPLE EMOTION ENGINE
-   FULL JS (CLEAN VERSION)
+   SAFE APPLE EMOTION ENGINE
+   v2 (NO BUG VERSION)
 ========================= */
+
+/* ========= SAFE DOM ========= */
+const $ = (id) => document.getElementById(id);
 
 /* ========= STATE ========= */
 let stats = JSON.parse(localStorage.getItem("stats")) || {
@@ -13,20 +16,38 @@ function save(){
     localStorage.setItem("stats", JSON.stringify(stats));
 }
 
+/* ========= LOADER SAFE KILL ========= */
+function hideLoader(){
+    const loader = $("loader");
+    if(!loader) return;
+
+    loader.style.transition = "0.8s ease";
+    loader.style.opacity = "0";
+
+    setTimeout(()=>loader.remove(), 800);
+}
+
+window.addEventListener("load", () => {
+    setTimeout(hideLoader, 600);
+});
+
 /* ========= CURSOR ========= */
-const cursor = document.getElementById("cursor");
+const cursor = $("cursor");
 
 window.addEventListener("mousemove",(e)=>{
-    if(cursor){
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-    }
+    if(!cursor) return;
+
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
 });
 
 /* ========= SCREENS ========= */
 function start(){
-    document.getElementById("home").classList.remove("active");
-    document.getElementById("main").classList.add("active");
+    const home = $("home");
+    const main = $("main");
+
+    if(home) home.classList.remove("active");
+    if(main) main.classList.add("active");
 
     localStorage.setItem("started","true");
 }
@@ -37,13 +58,13 @@ const texts = [
     "You are inside a soft universe 🌸",
     "Every click creates energy 💖",
     "Nothing here is random",
-    "You are part of something beautiful"
+    "You are safe here"
 ];
 
 let ti = 0;
 
 function changeText(){
-    const el = document.getElementById("text");
+    const el = $("text");
     if(!el) return;
 
     el.style.opacity = 0;
@@ -57,44 +78,39 @@ function changeText(){
 
 setInterval(changeText, 2500);
 
-/* ========= CANVAS SETUP ========= */
-const fx = document.getElementById("fx");
+/* ========= PARTICLES ========= */
+const fx = $("fx");
 const ctx = fx ? fx.getContext("2d") : null;
 
 let w = innerWidth;
 let h = innerHeight;
 
-if(fx){
+function resize(){
+    if(!fx) return;
+    w = innerWidth;
+    h = innerHeight;
     fx.width = w;
     fx.height = h;
 }
 
-window.addEventListener("resize",()=>{
-    w = innerWidth;
-    h = innerHeight;
-    if(fx){
-        fx.width = w;
-        fx.height = h;
-    }
-});
+window.addEventListener("resize", resize);
+resize();
 
-/* ========= PARTICLES ========= */
 let particles = [];
 
 function spawn(x,y,color){
-    for(let i=0;i<6;i++){
+    for(let i=0;i<5;i++){
         particles.push({
             x,
             y,
-            vx:(Math.random()-0.5)*4,
-            vy:(Math.random()-0.5)*4,
-            life:60,
+            vx:(Math.random()-0.5)*3,
+            vy:(Math.random()-0.5)*3,
+            life:50,
             color
         });
     }
 }
 
-/* mouse trail */
 window.addEventListener("mousemove",(e)=>{
     spawn(e.clientX, e.clientY, "white");
 });
@@ -110,11 +126,11 @@ function animate(){
         p.y += p.vy;
         p.life--;
 
-        ctx.globalAlpha = p.life / 60;
+        ctx.globalAlpha = p.life / 50;
         ctx.fillStyle = p.color;
 
         ctx.beginPath();
-        ctx.arc(p.x,p.y,2.5,0,Math.PI*2);
+        ctx.arc(p.x,p.y,2,0,Math.PI*2);
         ctx.fill();
     }
 
@@ -134,26 +150,27 @@ function pulse(){
     stats.clicks = energy;
     save();
 
-    const statsEl = document.getElementById("stats");
+    const statsEl = $("stats");
     if(statsEl) statsEl.innerText = energy;
 
     spawn(innerWidth/2, innerHeight/2, "#ff4fd8");
 
     if(energy > 20){
-        document.getElementById("main").classList.remove("active");
-        document.getElementById("final").classList.add("active");
+        const main = $("main");
+        const final = $("final");
+
+        if(main) main.classList.remove("active");
+        if(final) final.classList.add("active");
     }
 }
 
-/* ========= LOCAL STORAGE TIMER ========= */
-function updateTime(){
+/* ========= LOCAL TIME TRACK ========= */
+setInterval(()=>{
     stats.timeAlive = Date.now() - stats.start;
     save();
-}
+}, 2000);
 
-setInterval(updateTime, 2000);
-
-/* ========= FLOWERS (SAFE) ========= */
+/* ========= FLOWERS SAFE ========= */
 function createFlower(){
     const div = document.createElement("div");
 
@@ -172,42 +189,45 @@ function createFlower(){
 
     document.body.appendChild(div);
 
-    setTimeout(()=>div.remove(), 15000);
+    setTimeout(()=>div.remove(), 12000);
 }
 
-/* limited flowers (performance safe) */
+/* limited spawn */
 for(let i=0;i<5;i++){
     createFlower();
 }
 
-/* ========= SCROLL EFFECT ========= */
-let scrollTimeout;
+/* ========= SCROLL EFFECT SAFE ========= */
+let scrollTimer;
 
 window.addEventListener("wheel",(e)=>{
-    const scale = 1 + Math.min(Math.abs(e.deltaY)*0.0005, 0.03);
+    const scale = 1 + Math.min(Math.abs(e.deltaY)*0.0004, 0.02);
+
     document.body.style.transform = `scale(${scale})`;
 
-    clearTimeout(scrollTimeout);
+    clearTimeout(scrollTimer);
 
-    scrollTimeout = setTimeout(()=>{
+    scrollTimer = setTimeout(()=>{
         document.body.style.transform = "scale(1)";
-    },120);
+    },100);
 });
 
-/* ========= MUSIC ENGINE ========= */
+/* ========= MUSIC SAFE ========= */
 let musicStarted = false;
 
 function fadeIn(){
     if(musicStarted) return;
     musicStarted = true;
 
-    const music = document.getElementById("music");
+    const music = $("music");
     if(!music) return;
 
     music.volume = 0;
-    music.play();
+
+    music.play().catch(()=>{});
 
     let v = 0;
+
     const fade = setInterval(()=>{
         if(v < 0.3){
             v += 0.01;
@@ -220,19 +240,10 @@ function fadeIn(){
 
 window.addEventListener("click", fadeIn, { once:true });
 
-/* ========= SAVE ON EXIT ========= */
+/* ========= GLOBAL SAFE SAVE ========= */
 window.addEventListener("beforeunload", save);
-window.addEventListener("load", () => {
-    const loader = document.getElementById("loader");
 
-    setTimeout(() => {
-        if (loader) {
-            loader.style.opacity = "0";
-            loader.style.transition = "0.8s ease";
-
-            setTimeout(() => {
-                loader.remove();
-            }, 800);
-        }
-    }, 800);
-});
+/* ========= SAFETY NET (NO WHITE SCREEN EVER) ========= */
+window.onerror = function(){
+    hideLoader();
+};
