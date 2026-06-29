@@ -6,22 +6,27 @@
 <title>Apple Emotion Engine ✨</title>
 <link rel="stylesheet" href="style.css">
 </head>
-<!-- 3D CANVAS -->
+
+<body>
+
+<!-- 3D LAYER -->
 <div id="three-container"></div>
 
-<!-- ambient audio -->
+<!-- AUDIO -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_c3f2b6f0c7.mp3?filename=soft-piano-ambient-121931.mp3" type="audio/mp3">
 </audio>
-<body>
 
+<!-- CURSOR -->
 <div id="cursor"></div>
 
+<!-- LOADER -->
 <div id="loader">
     <div class="logo">✨</div>
     <div class="loadbar"></div>
 </div>
 
+<!-- APP -->
 <div id="app">
 
     <!-- SCREEN 1 -->
@@ -57,5 +62,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script src="app.js"></script>
+
 </body>
 </html>
