@@ -1,152 +1,29 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pro lepší den ❤️</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    overflow:hidden;
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#a18cd1);
-    background-size:400% 400%;
-    animation:bg 12s ease infinite;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-@keyframes bg{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-.box{
-    text-align:center;
-    background:rgba(255,255,255,.2);
-    backdrop-filter:blur(12px);
-    padding:50px;
-    border-radius:25px;
-    color:white;
-    max-width:650px;
-    box-shadow:0 20px 40px rgba(0,0,0,.2);
-}
-
-h1{
-    font-size:55px;
-    margin-bottom:20px;
-}
-
-p{
-    font-size:22px;
-    line-height:1.6;
-    min-height:80px;
-}
-
-button{
-    margin-top:30px;
-    padding:15px 35px;
-    border:none;
-    border-radius:50px;
-    background:white;
-    color:#ff4f81;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-button:hover{
-    transform:scale(1.08);
-}
-
-.heart{
-    position:absolute;
-    font-size:24px;
-    animation:float linear forwards;
-    pointer-events:none;
-}
-
-@keyframes float{
-    from{
-        transform:translateY(0) scale(0.5);
-        opacity:1;
-    }
-    to{
-        transform:translateY(-110vh) scale(1.5);
-        opacity:0;
-    }
-}
-</style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ultra Happiness Engine ✨</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="box">
-    <h1>🌸 Ahoj!</h1>
+<canvas id="stars"></canvas>
+<canvas id="fx"></canvas>
 
-    <p id="text">
-        Doufám, že se dnes aspoň jednou usměješ. 😊
-    </p>
+<div class="ui">
+    <h1>🌌 Ahoj</h1>
 
-    <button onclick="nextMessage()">Klikni pro radost ❤️</button>
+    <div id="text"></div>
+
+    <button onclick="boom()">Klikni pro energii ❤️</button>
+
+    <div class="small">Kliknutí: <span id="count">0</span></div>
 </div>
 
-<script>
+<audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a9d7d3.mp3"></audio>
 
-const messages=[
-"🌞 Dnešek nemusí být dokonalý, aby byl krásný.",
-"💖 Jsi mnohem silnější, než si myslíš.",
-"🌈 I po dešti vždycky vyjde slunce.",
-"😊 Úsměv dokáže změnit celý den.",
-"⭐ Někdo je rád, že tě má ve svém životě.",
-"🍀 Štěstí často přichází nečekaně.",
-"✨ Nikdy nepřestávej věřit sám/sama sobě.",
-"🌸 Dnes je skvělý den začít něco nového.",
-"❤️ Jsi dost přesně takový/taková, jaký/á jsi."
-];
-
-function nextMessage(){
-    const random=Math.floor(Math.random()*messages.length);
-    document.getElementById("text").innerHTML=messages[random];
-
-    for(let i=0;i<25;i++){
-        createHeart();
-    }
-}
-
-function createHeart(){
-
-    const heart=document.createElement("div");
-    heart.className="heart";
-
-    const icons=["❤️","💖","💕","💗","💜","🌸","✨"];
-
-    heart.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.top="100vh";
-    heart.style.fontSize=(20+Math.random()*30)+"px";
-    heart.style.animationDuration=(3+Math.random()*4)+"s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },7000);
-}
-
-setInterval(createHeart,400);
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
