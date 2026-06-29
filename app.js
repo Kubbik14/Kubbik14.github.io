@@ -1,16 +1,29 @@
 /* =========================
-   APPLE MOTION ENGINE
-   PART 2
+   APPLE EMOTION ENGINE
+   FULL JS (CLEAN VERSION)
 ========================= */
 
+/* ========= STATE ========= */
+let stats = JSON.parse(localStorage.getItem("stats")) || {
+    clicks: 0,
+    start: Date.now()
+};
+
+function save(){
+    localStorage.setItem("stats", JSON.stringify(stats));
+}
+
+/* ========= CURSOR ========= */
 const cursor = document.getElementById("cursor");
 
 window.addEventListener("mousemove",(e)=>{
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+    if(cursor){
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    }
 });
 
-/* ===== SCREENS ===== */
+/* ========= SCREENS ========= */
 function start(){
     document.getElementById("home").classList.remove("active");
     document.getElementById("main").classList.add("active");
@@ -18,44 +31,54 @@ function start(){
     localStorage.setItem("started","true");
 }
 
-/* ===== TEXT ENGINE ===== */
+/* ========= TEXT ENGINE ========= */
 const texts = [
-"Everything is alive in motion ✨",
-"You are inside a soft universe 🌸",
-"Every click creates energy 💖",
-"Nothing here is random"
+    "Everything is alive in motion ✨",
+    "You are inside a soft universe 🌸",
+    "Every click creates energy 💖",
+    "Nothing here is random",
+    "You are part of something beautiful"
 ];
 
-let i = 0;
+let ti = 0;
+
 function changeText(){
     const el = document.getElementById("text");
+    if(!el) return;
+
     el.style.opacity = 0;
 
     setTimeout(()=>{
-        el.innerText = texts[i];
+        el.innerText = texts[ti];
         el.style.opacity = 1;
-        i = (i+1)%texts.length;
+        ti = (ti + 1) % texts.length;
     },300);
 }
-setInterval(changeText,2500);
 
-/* ===== PARTICLE SYSTEM ===== */
+setInterval(changeText, 2500);
+
+/* ========= CANVAS SETUP ========= */
 const fx = document.getElementById("fx");
-const ctx = fx.getContext("2d");
+const ctx = fx ? fx.getContext("2d") : null;
 
 let w = innerWidth;
 let h = innerHeight;
 
-fx.width = w;
-fx.height = h;
+if(fx){
+    fx.width = w;
+    fx.height = h;
+}
 
 window.addEventListener("resize",()=>{
     w = innerWidth;
     h = innerHeight;
-    fx.width = w;
-    fx.height = h;
+    if(fx){
+        fx.width = w;
+        fx.height = h;
+    }
 });
 
+/* ========= PARTICLES ========= */
 let particles = [];
 
 function spawn(x,y,color){
@@ -71,12 +94,15 @@ function spawn(x,y,color){
     }
 }
 
+/* mouse trail */
 window.addEventListener("mousemove",(e)=>{
-    spawn(e.clientX,e.clientY,"white");
+    spawn(e.clientX, e.clientY, "white");
 });
 
-/* ===== MAIN LOOP ===== */
+/* ========= MAIN LOOP ========= */
 function animate(){
+    if(!ctx) return;
+
     ctx.clearRect(0,0,w,h);
 
     for(let p of particles){
@@ -84,7 +110,7 @@ function animate(){
         p.y += p.vy;
         p.life--;
 
-        ctx.globalAlpha = p.life/60;
+        ctx.globalAlpha = p.life / 60;
         ctx.fillStyle = p.color;
 
         ctx.beginPath();
@@ -92,18 +118,24 @@ function animate(){
         ctx.fill();
     }
 
-    particles = particles.filter(p=>p.life>0);
+    particles = particles.filter(p => p.life > 0);
 
     requestAnimationFrame(animate);
 }
+
 animate();
 
-/* ===== CLICK ENERGY ===== */
+/* ========= ENERGY SYSTEM ========= */
 let energy = 0;
 
 function pulse(){
     energy++;
-    document.getElementById("stats").innerText = energy;
+
+    stats.clicks = energy;
+    save();
+
+    const statsEl = document.getElementById("stats");
+    if(statsEl) statsEl.innerText = energy;
 
     spawn(innerWidth/2, innerHeight/2, "#ff4fd8");
 
@@ -112,38 +144,20 @@ function pulse(){
         document.getElementById("final").classList.add("active");
     }
 }
-/* =========================
-   LOCAL STORAGE SYSTEM
-========================= */
 
-let stats = JSON.parse(localStorage.getItem("stats")) || {
-    clicks:0,
-    time:Date.now()
-};
-
-function save(){
-    localStorage.setItem("stats", JSON.stringify(stats));
+/* ========= LOCAL STORAGE TIMER ========= */
+function updateTime(){
+    stats.timeAlive = Date.now() - stats.start;
+    save();
 }
 
-/* =========================
-   AUTO DARK MODE (TIME)
-========================= */
+setInterval(updateTime, 2000);
 
-function setMode(){
-    const hour = new Date().getHours();
-    if(hour > 18 || hour < 6){
-        document.body.style.filter = "brightness(0.8) contrast(1.1)";
-    }
-}
-setMode();
-
-/* =========================
-   SVG FLOWERS (DECOR)
-========================= */
-
+/* ========= FLOWERS (SAFE) ========= */
 function createFlower(){
-    const svg = document.createElement("div");
-    svg.innerHTML = `
+    const div = document.createElement("div");
+
+    div.innerHTML = `
     <svg class="flower" viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="10" fill="pink"/>
         <circle cx="30" cy="50" r="10" fill="violet"/>
@@ -151,99 +165,60 @@ function createFlower(){
         <circle cx="50" cy="30" r="10" fill="violet"/>
         <circle cx="50" cy="70" r="10" fill="pink"/>
     </svg>`;
-    
-    svg.style.position="absolute";
-    svg.style.left=Math.random()*100+"vw";
-    svg.style.top=Math.random()*100+"vh";
 
-    document.body.appendChild(svg);
+    div.style.position = "absolute";
+    div.style.left = Math.random()*100 + "vw";
+    div.style.top = Math.random()*100 + "vh";
+
+    document.body.appendChild(div);
+
+    setTimeout(()=>div.remove(), 15000);
 }
 
-for(let i=0;i<8;i++) createFlower();
+/* limited flowers (performance safe) */
+for(let i=0;i<5;i++){
+    createFlower();
+}
 
-/* =========================
-   3D HEART (THREE.JS)
-========================= */
+/* ========= SCROLL EFFECT ========= */
+let scrollTimeout;
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha:true });
+window.addEventListener("wheel",(e)=>{
+    const scale = 1 + Math.min(Math.abs(e.deltaY)*0.0005, 0.03);
+    document.body.style.transform = `scale(${scale})`;
 
-renderer.setSize(innerWidth, innerHeight);
-document.getElementById("three-container").appendChild(renderer.domElement);
+    clearTimeout(scrollTimeout);
 
-/* heart geometry (simple parametric illusion) */
-const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-
-const material = new THREE.MeshStandardMaterial({
-    color:0xff4fd8,
-    emissive:0x550033,
-    roughness:0.3,
-    metalness:0.7
+    scrollTimeout = setTimeout(()=>{
+        document.body.style.transform = "scale(1)";
+    },120);
 });
 
-const heart = new THREE.Mesh(geometry, material);
-scene.add(heart);
-
-const light = new THREE.PointLight(0xffffff, 2);
-light.position.set(20,20,20);
-scene.add(light);
-
-camera.position.z = 30;
-
-function animate3D(){
-    requestAnimationFrame(animate3D);
-
-    heart.rotation.x += 0.005;
-    heart.rotation.y += 0.01;
-
-    renderer.render(scene, camera);
-}
-animate3D();
-
-/* =========================
-   MUSIC ENGINE
-========================= */
-
-const music = document.getElementById("music");
-music.volume = 0;
+/* ========= MUSIC ENGINE ========= */
+let musicStarted = false;
 
 function fadeIn(){
+    if(musicStarted) return;
+    musicStarted = true;
+
+    const music = document.getElementById("music");
+    if(!music) return;
+
+    music.volume = 0;
     music.play();
+
     let v = 0;
-    let fade = setInterval(()=>{
-        if(v < 0.4){
+    const fade = setInterval(()=>{
+        if(v < 0.3){
             v += 0.01;
             music.volume = v;
         } else {
             clearInterval(fade);
         }
-    },100);
+    },80);
 }
 
-/* start music on interaction */
 window.addEventListener("click", fadeIn, { once:true });
 
-/* =========================
-   SCROLL CINEMATIC EFFECT
-========================= */
-
-window.addEventListener("wheel",(e)=>{
-    const scale = 1 + Math.min(Math.abs(e.deltaY)*0.001, 0.1);
-    document.body.style.transform = `scale(${scale})`;
-
-    setTimeout(()=>{
-        document.body.style.transform = "scale(1)";
-    },150);
-});
-
-/* =========================
-   FINAL POLISH LOOP
-========================= */
-
-function loopFix(){
-    stats.time = Date.now() - stats.time;
-    save();
-    requestAnimationFrame(loopFix);
-}
-loopFix();
+/* ========= SAVE ON EXIT ========= */
+window.addEventListener("beforeunload", save);
