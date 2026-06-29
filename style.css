@@ -160,3 +160,22 @@ opacity:0;
 opacity:1;
 transform:scale(1);
 }
+
+#three-container{
+position:fixed;
+inset:0;
+z-index:-2;
+}
+
+svg.flower{
+position:fixed;
+width:60px;
+height:60px;
+opacity:0.15;
+animation:spin 20s linear infinite;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
