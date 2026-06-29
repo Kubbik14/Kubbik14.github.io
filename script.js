@@ -14,121 +14,118 @@ bg.height = fx.height = h;
 resize();
 window.onresize = resize;
 
-let energy = 0;
+let loveEnergy = 0;
 
 const messages = [
-"Ty nejsi náhoda.",
-"Každý okamžik se přepisuje.",
-"Realita reaguje na tvoji energii.",
-"Teď se něco mění.",
-"Tvoje existence má váhu.",
-"Všechno je propojené."
+"Jsi něčí nejhezčí myšlenka 💖",
+"Svět je hezčí, když jsi tady 🌸",
+"Nezapomeň, jak jsi výjimečná ✨",
+"Kdyby hvězdy mohly mluvit, mluvily by o tobě 🌙",
+"Tvá energie je jemná magie 🫶",
+"Jsi důvod, proč někdo věří na krásu 💕"
 ];
 
-// TEXT ENGINE
-let mi = 0;
-let ci = 0;
-
+// typing
+let mi=0, ci=0;
 function type(){
-const el = document.getElementById("text");
-let msg = messages[mi];
+let el=document.getElementById("text");
+let msg=messages[mi];
 
-el.innerHTML = msg.slice(0,ci++);
-if(ci <= msg.length){
+el.innerHTML=msg.slice(0,ci++);
+
+if(ci<=msg.length){
 requestAnimationFrame(type);
 }else{
 setTimeout(()=>{
-ci = 0;
-mi = (mi+1)%messages.length;
+ci=0;
+mi=(mi+1)%messages.length;
 type();
-},1200);
+},2500);
 }
 }
 type();
 
-// STARS
-let stars = Array.from({length:200},()=>({
+// soft stars background
+let stars = Array.from({length:120},()=>({
 x:Math.random()*w,
 y:Math.random()*h,
-z:Math.random()*3
+r:Math.random()*1.5
 }));
 
-function drawBg(){
+function draw(){
 b.clearRect(0,0,w,h);
 
+b.fillStyle="rgba(255,192,203,0.8)";
 for(let s of stars){
-b.fillStyle = "white";
-b.globalAlpha = 1 - s.z/3;
 b.beginPath();
-b.arc(s.x,s.y,s.z,0,Math.PI*2);
+b.arc(s.x,s.y,s.r,0,Math.PI*2);
 b.fill();
 
-s.y += 0.3 + s.z*0.2;
-
-if(s.y > h){
-s.y = 0;
-s.x = Math.random()*w;
+s.y += 0.2;
+if(s.y>h){
+s.y=0;
+s.x=Math.random()*w;
 }
 }
 
-requestAnimationFrame(drawBg);
+requestAnimationFrame(draw);
 }
-drawBg();
+draw();
 
-// PARTICLE GOD SYSTEM
-let particles = [];
+// particles
+let particles=[];
 
-function pulse(){
-energy++;
-document.getElementById("count").innerText = energy;
+function love(){
+loveEnergy++;
+document.getElementById("count").innerText=loveEnergy;
 
-document.getElementById("click").play();
+document.getElementById("sound").play();
 
-// BIG BURST
-for(let i=0;i<120;i++){
+// heart burst
+for(let i=0;i<70;i++){
 particles.push({
 x:w/2,
 y:h/2,
-vx:(Math.random()-0.5)*12,
-vy:(Math.random()-0.5)*12,
-life:120,
-color:`hsl(${Math.random()*360},100%,60%)`
+vx:(Math.random()-0.5)*6,
+vy:(Math.random()-0.5)*6,
+life:100,
+color:`hsl(${300+Math.random()*40},100%,70%)`
 });
 }
 }
 
-// MOUSE ENERGY FIELD
+// mouse magic
 window.addEventListener("mousemove",(e)=>{
-for(let i=0;i<3;i++){
+for(let i=0;i<2;i++){
 particles.push({
 x:e.clientX,
 y:e.clientY,
-vx:(Math.random()-0.5)*3,
-vy:(Math.random()-0.5)*3,
+vx:(Math.random()-0.5)*2,
+vy:(Math.random()-0.5)*2,
 life:40,
-color:"white"
+color:"pink"
 });
 }
 });
 
-// LOOP
+// render
 function loop(){
 f.clearRect(0,0,w,h);
 
 for(let p of particles){
-p.x += p.vx;
-p.y += p.vy;
+p.x+=p.vx;
+p.y+=p.vy;
 p.life--;
 
-f.globalAlpha = p.life/120;
-f.fillStyle = p.color;
+f.globalAlpha=p.life/100;
+f.fillStyle=p.color;
 
 f.beginPath();
 f.arc(p.x,p.y,3,0,Math.PI*2);
 f.fill();
 }
 
-particles = particles.filter(p=>p.life>0);
+particles=particles.filter(p=>p.life>0);
 
 requestAnimationFrame(loop);
 }
