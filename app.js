@@ -222,3 +222,17 @@ window.addEventListener("click", fadeIn, { once:true });
 
 /* ========= SAVE ON EXIT ========= */
 window.addEventListener("beforeunload", save);
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+
+    setTimeout(() => {
+        if (loader) {
+            loader.style.opacity = "0";
+            loader.style.transition = "0.8s ease";
+
+            setTimeout(() => {
+                loader.remove();
+            }, 800);
+        }
+    }, 800);
+});
