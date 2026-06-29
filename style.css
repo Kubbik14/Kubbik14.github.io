@@ -2,84 +2,103 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:"Arial", sans-serif;
+font-family:-apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body{
-height:100vh;
 overflow:hidden;
+background:#05060a;
+color:white;
+}
+
+/* LOADER */
+#loader{
+position:fixed;
+inset:0;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#120018;
+background:black;
+z-index:999;
 }
 
-canvas{
+.loadbar{
+width:200px;
+height:3px;
+background:#222;
+overflow:hidden;
+margin-top:20px;
+border-radius:10px;
+}
+
+.loadbar::after{
+content:"";
+width:50%;
+height:100%;
+background:white;
+display:block;
+animation:load 2s infinite;
+}
+
+@keyframes load{
+0%{transform:translateX(-100%);}
+100%{transform:translateX(200%);}
+}
+
+/* SCREENS */
+.screen{
 position:absolute;
-top:0;
-left:0;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
 }
 
-.card{
-position:relative;
-z-index:10;
+.screen.active{
+display:flex;
+}
+
+/* GLASS EFFECT */
+.glass{
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(30px);
+padding:40px;
+border-radius:25px;
+box-shadow:0 0 80px rgba(0,0,0,0.5);
 text-align:center;
-padding:50px;
-border-radius:30px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(25px);
-box-shadow:0 0 80px rgba(255,105,180,0.3);
-border:1px solid rgba(255,255,255,0.1);
-max-width:500px;
 }
 
-.title{
-font-size:40px;
-color:#ffb6ff;
-margin-bottom:20px;
-text-shadow:0 0 20px #ff69b4;
+.center{
+position:absolute;
+z-index:10;
 }
 
-#text{
-font-size:20px;
-min-height:60px;
-color:#ffe6ff;
-margin-bottom:20px;
-}
-
+/* BUTTON */
 button{
-padding:15px 30px;
+margin-top:20px;
+padding:12px 25px;
 border:none;
-border-radius:50px;
-font-size:16px;
+border-radius:999px;
+background:white;
+color:black;
 cursor:pointer;
-background:linear-gradient(45deg,#ff69b4,#c084fc);
-color:white;
 transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.1);
-box-shadow:0 0 25px #ff69b4;
+transform:scale(1.05);
 }
 
-.counter{
-margin-top:15px;
-opacity:0.8;
-color:#ffd6ff;
-}
-
-.particle{
-position:absolute;
-width:8px;
-height:8px;
+/* CURSOR */
+#cursor{
+position:fixed;
+width:20px;
+height:20px;
 border-radius:50%;
-background:pink;
-animation:float 6s linear forwards;
-opacity:0.8;
-}
-
-@keyframes float{
-from{transform:translateY(0);opacity:1;}
-to{transform:translateY(-100vh);opacity:0;}
+background:white;
+mix-blend-mode:difference;
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:1000;
 }
