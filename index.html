@@ -1,257 +1,150 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pro lepší denn 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+    <title>Klikni na mě</title>
 
-body{
-height:100vh;
-overflow:hidden;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff9a9e,#fad0c4,#a18cd1);
-background-size:400% 400%;
-animation:bg 12s ease infinite;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
+        body {
+            margin: 0;
+            min-height: 100vh;
 
-/* CARD */
-.box{
-text-align:center;
-padding:50px;
-border-radius:25px;
-background:rgba(255,255,255,0.2);
-backdrop-filter:blur(12px);
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
-color:white;
-max-width:600px;
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-h1{
-font-size:48px;
-margin-bottom:20px;
-}
+            font-family: Arial, sans-serif;
 
-p{
-font-size:20px;
-min-height:70px;
-line-height:1.5;
-}
+            background:
+                radial-gradient(circle at 20% 20%, #6c63ff55, transparent 35%),
+                radial-gradient(circle at 80% 80%, #00d4ff44, transparent 35%),
+                #0b1020;
 
-/* BUTTON */
-button{
-margin-top:25px;
-padding:14px 30px;
-border:none;
-border-radius:50px;
-background:white;
-color:#ff4f81;
-font-size:16px;
-cursor:pointer;
-transition:0.3s;
-}
+            color: white;
+            overflow: hidden;
+        }
 
-button:hover{
-transform:scale(1.08);
-}
+        .container {
+            text-align: center;
+        }
 
-/* HEARTS */
-.heart{
-position:absolute;
-bottom:-50px;
-font-size:24px;
-animation:floatUp linear forwards;
-pointer-events:none;
-}
+        h1 {
+            font-size: 42px;
+            margin-bottom: 35px;
+            text-shadow: 0 0 25px #6c63ff;
+        }
 
-@keyframes floatUp{
-from{
-transform:translateY(0) scale(0.5);
-opacity:1;
-}
-to{
-transform:translateY(-120vh) scale(1.5);
-opacity:0;
-}
-}
-</style>
+        .button {
+            padding: 18px 45px;
+            border: none;
+            border-radius: 16px;
+
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+
+            background: linear-gradient(
+                135deg,
+                #6c63ff,
+                #8b5cf6,
+                #00bfff
+            );
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px #00000055,
+                0 0 25px #6c63ff66;
+
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-4px) scale(1.04);
+
+            box-shadow:
+                0 15px 40px #00000077,
+                0 0 40px #6c63ffaa;
+        }
+
+        .button:active {
+            transform: scale(0.97);
+        }
+
+        .hint {
+            margin-top: 20px;
+            color: #aeb6d9;
+            font-size: 14px;
+        }
+
+        /* PFP */
+        #pfp {
+            display: none;
+
+            width: 220px;
+            height: 220px;
+
+            object-fit: cover;
+
+            margin: 30px auto 0;
+
+            border-radius: 50%;
+
+            border: 5px solid white;
+
+            box-shadow:
+                0 0 20px #6c63ff,
+                0 0 60px #00bfff88;
+
+            animation: appear 0.6s ease forwards;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="box">
-<h1>🌸 Ahoj!</h1>
+    <div class="container">
 
-<p id="text">
-Doufám, že se dnes aspoň jednou usměješ 😊
-</p>
+        <h1>✨ Moje stránka</h1>
 
-<button onclick="nextMessage()">Klikni pro překvapení❤️</button>
-</div>
+        <button class="button" onclick="showPfp()">
+            Klikni na mě
+        </button>
 
-<script>
-const messages = [
-"🌞 Dnešek nemusí být dokonalý, aby byl krásný.",
-"💖 Jsi silnější, než si myslíš.",
-"🌈 I po dešti vždycky vyjde slunce.",
-"😊 Úsměv dokáže změnit den.",
-"⭐ Někdo je rád, že tě má.",
-"🍀 Štěstí přichází nečekaně.",
-"✨ Věř si víc.",
-"🌸 Dnes je skvělý den začít znovu.",
-"❤️ Jsi přesně takový/á, jaký/á máš být.",
-"🌻 Každý nový den je nová příležitost.",
-"🌼 Dobré věci přicházejí v pravý čas.",
-"💛 Máš v sobě víc odvahy, než tušíš.",
-"🌙 Odpočiň si, zítřek je nový začátek.",
-"☀️ I malý krok tě posune vpřed.",
-"🌷 Radost se skrývá v maličkostech.",
-"🌺 Každý den může přinést něco krásného.",
-"💫 Nikdy nepřestávej věřit svým snům.",
-"🦋 Změna může být začátkem něčeho úžasného.",
-"🌟 Dnes může být tvůj šťastný den.",
-"🤍 Buď na sebe hodný/á.",
-"🌸 Tvůj úsměv má sílu.",
-"💕 Jsi důležitější, než si myslíš.",
-"🌈 Vždy existuje důvod k naději.",
-"🍃 Zhluboka se nadechni a pokračuj.",
-"🌞 Každé ráno přináší nový začátek.",
-"⭐ Nikdy nejsi sám/sama.",
-"🌹 Tvé sny mají hodnotu.",
-"✨ Malé kroky vedou k velkým cílům.",
-"🍀 Dnes tě může potkat něco krásného.",
-"💖 Máš právo být šťastný/á.",
-"🌼 I obyčejný den může být výjimečný.",
-"🌻 Tvoje cesta je jedinečná.",
-"🌸 Buď pyšný/á na to, kam jsi došel/došla.",
-"☀️ Každý úsměv se počítá.",
-"🌈 Věř, že všechno dobře dopadne.",
-"💫 Nikdy není pozdě začít.",
-"❤️ Zasloužíš si lásku i respekt.",
-"🌷 Nezapomeň na své sny.",
-"🍃 Klid je také pokrok.",
-"🌟 Máš sílu překonat překážky.",
-"😊 Dnes je dobrý den na radost.",
-"🌺 Každá zkušenost tě něco naučí.",
-"💛 Buď trpělivý/á sám/sama se sebou.",
-"🦋 Krásné věci přicházejí postupně.",
-"🌞 Důvěřuj své cestě.",
-"🍀 Dobré věci si tě najdou.",
-"🌸 Každý den je nový příběh.",
-"⭐ Věř své intuici.",
-"💖 Tvá přítomnost má význam.",
-"✨ I malé vítězství je vítězství.",
-"🌼 Dnes udělej něco, co tě potěší.",
-"☀️ Tvoje budoucnost je plná možností.",
-"🌈 Neztrácej naději.",
-"❤️ Jsi dost dobrý/á už teď.",
-"🌻 Každý den můžeš růst.",
-"🌷 Tvé úsilí má smysl.",
-"💫 Štěstí začíná uvnitř tebe.",
-"🍃 Klidná mysl přináší sílu.",
-"😊 Všechno nemusí být perfektní.",
-"🌸 Buď světlem pro sebe i ostatní.",
-"⭐ Dnešek stojí za to prožít naplno.",
-"💛 Tvá laskavost mění svět.",
-"🌞 Nezapomeň, jak daleko jsi došel/došla.",
-"🌺 Důvěřuj procesu.",
-"✨ Každý nový den je dar.",
-"🦋 Neboj se zazářit.",
-"🍀 Dnes může začít něco krásného.",
-"❤️ Jsi jedinečný/á.",
-"🌈 I pomalý pokrok je pokrok.",
-"☀️ Dýchej. Zvládneš to.",
-"🌷 Věř svému srdci.",
-"🌻 Tvá energie inspiruje ostatní.",
-"💖 Zasloužíš si klid.",
-"🌼 Každý úspěch začíná prvním krokem.",
-"💫 Nech dnešek překvapit tě něčím hezkým.",
-"⭐ Každá chvíle je nová šance.",
-"🌸 Tvé možnosti jsou nekonečné.",
-"🍃 Dnes si dopřej chvilku pro sebe.",
-"😊 Svět je hezčí s tvým úsměvem.",
-"❤️ Nikdy nepodceňuj svou sílu.",
-"🌞 Dnes je správný čas věřit si.",
-"🌈 Dobré věci jsou na cestě.",
-"🌻 Jsi odvážnější, než cítíš.",
-"💛 Tvé srdce ví cestu.",
-"✨ Každý den je krok vpřed.",
-"🌺 Buď hrdý/á na své malé pokroky.",
-"🍀 To nejlepší teprve přijde.",
-"💖 Dnešek může být začátkem něčeho krásného.",
-"⭐ Tvá hodnota nezávisí na názorech ostatních.",
-"🌷 Důvěřuj tomu, co přijde.",
-"☀️ I dnes máš důvod se usmát.",
-"🦋 Krása života je v přítomném okamžiku.",
-"🌸 Každý den přináší novou naději.",
-"💫 Tvoje odvaha roste s každým krokem.",
-"🌼 Nezapomeň si vážit sám/sama sebe.",
-"❤️ Dnes můžeš změnit svůj příběh.",
-"🌞 Jsi schopnější, než si myslíš.",
-"🌈 V každém dni se skrývá něco dobrého.",
-"🍀 Přijímej radost, když přijde.",
-"😊 Nezapomeň dnes myslet i na sebe.",
-"⭐ Věř, že zvládneš i to, čeho se bojíš.",
-"💖 Každý den je nová příležitost zazářit.",
-"✨ Život je plný malých zázraků.",
-"🌻 Děkuj za to, co už máš.",
-"🌸 Tvoje budoucnost začíná dneškem."
-];
+        <div class="hint" id="hint">
+            Zatím se nic nestane... 👀
+        </div>
 
-function nextMessage(){
-const text = document.getElementById("text");
-text.innerText = messages[Math.floor(Math.random()*messages.length)];
+        <img id="pfp" src="pfp.png" alt="PFP">
 
-for(let i=0;i<20;i++){
-createHeart();
-}
-}
+    </div>
 
-function createHeart(){
-const heart = document.createElement("div");
-heart.className = "heart";
+    <script>
+        function showPfp() {
+            document.getElementById("pfp").style.display = "block";
 
-const icons = [ 
-  "❤️",
-  "💖",
-  "💕",
-  "💗",
-  "💘",
-  "💝",
-  "🥰",
-  "😍",
-  "😘",
-  "🌹"
-];
-heart.innerText = icons[Math.floor(Math.random()*icons.length)];
-
-heart.style.left = Math.random()*100 + "vw";
-heart.style.fontSize = (18 + Math.random()*25) + "px";
-heart.style.animationDuration = (3 + Math.random()*3) + "s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>heart.remove(), 7000);
-}
-
-/* ambient hearts */
-setInterval(createHeart, 600);
-</script>
+            document.getElementById("hint").textContent =
+                "👀 Tak tady je!";
+        }
+    </script>
 
 </body>
 </html>
