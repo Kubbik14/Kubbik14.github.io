@@ -34,7 +34,6 @@
             position: relative;
             z-index: 2;
 
-            /* ještě trochu výš */
             transform: translateY(-90px);
         }
 
@@ -55,7 +54,7 @@
         }
 
         h1 {
-            margin: 20px 0 5px;
+            margin: 20px 0 0;
 
             color: white;
             font-size: 42px;
@@ -68,72 +67,19 @@
             animation: appear 1s ease;
         }
 
-        /* nový text pod jménem */
-        .bio {
-            color: #ffc4d8;
-            font-size: 16px;
-            margin-top: 8px;
-
-            letter-spacing: 1px;
-
-            text-shadow: 0 0 10px #ff6b9d;
-
-            animation: appear 1.2s ease;
-        }
-
-        /* oddělovací čára */
-        .line {
-            width: 80px;
-            height: 2px;
-
-            margin: 18px auto;
-
-            border-radius: 10px;
-
-            background: #ff6b9d;
-
-            box-shadow:
-                0 0 10px #ff6b9d,
-                0 0 20px #ff4f81;
-
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        /* malá statistika */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-
-            margin-top: 15px;
-        }
-
-        .stat {
-            color: white;
-            font-size: 15px;
-        }
-
-        .stat span {
-            display: block;
-
-            color: #ff8fb6;
-            font-size: 20px;
-            font-weight: bold;
-
-            margin-bottom: 3px;
-
-            text-shadow: 0 0 10px #ff4f81;
-        }
-
-        /* tlačítko */
-        .button {
+        /* tlačítko Fotky */
+        .photos-button {
             display: inline-block;
 
-            margin-top: 22px;
-            padding: 11px 25px;
+            margin-top: 25px;
+            padding: 12px 32px;
 
             color: white;
             text-decoration: none;
+
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
 
             border: 1px solid #ff6b9d88;
             border-radius: 30px;
@@ -141,21 +87,23 @@
             background: #ff6b9d18;
 
             box-shadow:
-                0 0 15px #ff6b9d33;
+                0 0 15px #ff6b9d44;
 
             transition: .3s ease;
+
+            animation: appear 1.3s ease;
         }
 
-        .button:hover {
+        .photos-button:hover {
+            transform: translateY(-4px) scale(1.03);
+
             background: #ff6b9d33;
 
-            transform: translateY(-3px);
-
             box-shadow:
-                0 0 20px #ff6b9d88;
+                0 0 20px #ff6b9d99,
+                0 0 40px #ff4f8155;
         }
 
-        /* srdíčka */
         .heart {
             position: absolute;
 
@@ -194,18 +142,14 @@
         .heart:nth-child(5) {
             top: -60px;
             right: 10px;
-
             font-size: 20px;
-
             animation-delay: .8s;
         }
 
         .heart:nth-child(6) {
             bottom: -40px;
             left: 30px;
-
             font-size: 22px;
-
             animation-delay: 1.8s;
         }
 
@@ -231,21 +175,7 @@
             }
         }
 
-        @keyframes glow {
-            0%, 100% {
-                opacity: .6;
-                transform: scaleX(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scaleX(1.15);
-            }
-        }
-
-        /* mobil */
         @media (max-width: 500px) {
-
             .profile {
                 transform: translateY(-60px);
             }
@@ -257,14 +187,6 @@
 
             h1 {
                 font-size: 36px;
-            }
-
-            .heart:nth-child(3) {
-                left: -35px;
-            }
-
-            .heart:nth-child(4) {
-                right: -35px;
             }
         }
     </style>
@@ -289,31 +211,8 @@
 
         <h1>Anet</h1>
 
-        <div class="bio">
-            ♡ just being me ♡
-        </div>
-
-        <div class="line"></div>
-
-        <div class="stats">
-            <div class="stat">
-                <span>♡</span>
-                vibes
-            </div>
-
-            <div class="stat">
-                <span>∞</span>
-                dreams
-            </div>
-
-            <div class="stat">
-                <span>♥</span>
-                love
-            </div>
-        </div>
-
-        <a href="#" class="button">
-            ✨ little things ✨
+        <a href="fotky.html" class="photos-button">
+            📸 Fotky
         </a>
 
     </div>
