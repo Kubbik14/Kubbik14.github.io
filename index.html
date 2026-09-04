@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Klikni na mee</title>
+    <title>Anet ❤️</title>
 
     <style>
         * {
@@ -14,7 +13,6 @@
         body {
             margin: 0;
             min-height: 100vh;
-
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,98 +20,116 @@
             font-family: Arial, sans-serif;
 
             background:
-                radial-gradient(circle at 20% 20%, #6c63ff55, transparent 35%),
-                radial-gradient(circle at 80% 80%, #00d4ff44, transparent 35%),
-                #0b1020;
+                radial-gradient(circle at 20% 20%, #ff6b9d55, transparent 35%),
+                radial-gradient(circle at 80% 80%, #ff4f8155, transparent 35%),
+                #160b16;
 
-            color: white;
             overflow: hidden;
         }
 
-        .container {
+        .profile {
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
-        h1 {
-            font-size: 42px;
-            margin-bottom: 35px;
-            text-shadow: 0 0 25px #6c63ff;
-        }
-
-        .button {
-            padding: 18px 45px;
-            border: none;
-            border-radius: 16px;
-
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-
-            background: linear-gradient(
-                135deg,
-                #6c63ff,
-                #8b5cf6,
-                #00bfff
-            );
-
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 30px #00000055,
-                0 0 25px #6c63ff66;
-
-            transition: 0.2s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-4px) scale(1.04);
-
-            box-shadow:
-                0 15px 40px #00000077,
-                0 0 40px #6c63ffaa;
-        }
-
-        .button:active {
-            transform: scale(0.97);
-        }
-
-        .hint {
-            margin-top: 20px;
-            color: #aeb6d9;
-            font-size: 14px;
-        }
-
-        /* PFP */
-        #pfp {
-            display: none;
-
-            width: 220px;
-            height: 220px;
+        .pfp {
+            width: 230px;
+            height: 230px;
 
             object-fit: cover;
-
-            margin: 30px auto 0;
-
             border-radius: 50%;
 
             border: 5px solid white;
 
             box-shadow:
-                0 0 20px #6c63ff,
-                0 0 60px #00bfff88;
+                0 0 20px #ff6b9d,
+                0 0 50px #ff4f8188;
 
-            animation: appear 0.6s ease forwards;
+            animation: appear 1s ease;
+        }
+
+        h1 {
+            margin: 20px 0 0;
+
+            color: white;
+            font-size: 42px;
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px #ff6b9d,
+                0 0 25px #ff4f81;
+
+            animation: appear 1s ease;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 28px;
+
+            animation: float 3s ease-in-out infinite;
+
+            text-shadow: 0 0 15px #ff4f81;
+        }
+
+        .heart:nth-child(1) {
+            top: -30px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .heart:nth-child(2) {
+            top: 40px;
+            right: -60px;
+            animation-delay: 0.5s;
+        }
+
+        .heart:nth-child(3) {
+            bottom: 80px;
+            left: -75px;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(4) {
+            bottom: 20px;
+            right: -65px;
+            animation-delay: 1.5s;
+        }
+
+        .heart:nth-child(5) {
+            top: -60px;
+            right: 10px;
+            font-size: 20px;
+            animation-delay: 0.8s;
+        }
+
+        .heart:nth-child(6) {
+            bottom: -40px;
+            left: 30px;
+            font-size: 22px;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-15px) scale(1.15);
+            }
         }
 
         @keyframes appear {
             from {
                 opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
+                transform: scale(0.7);
             }
 
             to {
                 opacity: 1;
-                transform: scale(1) rotate(0deg);
+                transform: scale(1);
             }
         }
     </style>
@@ -121,30 +137,20 @@
 
 <body>
 
-    <div class="container">
+    <div class="profile">
 
-        <h1>✨ Moje stránka</h1>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
+        <span class="heart">♥</span>
 
-        <button class="button" onclick="showPfp()">
-            Klikni na mě
-        </button>
+        <img class="pfp" src="pfp.png" alt="Anet">
 
-        <div class="hint" id="hint">
-            Zatím se nic nestane... 👀
-        </div>
-
-        <img id="pfp" src="pfp.png" alt="PFP">
+        <h1>Anet</h1>
 
     </div>
-
-    <script>
-        function showPfp() {
-            document.getElementById("pfp").style.display = "block";
-
-            document.getElementById("hint").textContent =
-                "👀 Tak tady je!";
-        }
-    </script>
 
 </body>
 </html>
