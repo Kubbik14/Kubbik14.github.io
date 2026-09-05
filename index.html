@@ -29,6 +29,55 @@
             overflow: hidden;
         }
 
+        /* Instagram v pravém horním rohu */
+        .instagram {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+            text-decoration: none;
+
+            border: 1px solid #ff6b9d88;
+            border-radius: 18px;
+
+            background: #ff6b9d18;
+
+            box-shadow:
+                0 0 15px #ff6b9d66,
+                0 0 35px #ff4f8144;
+
+            transition: .3s ease;
+
+            z-index: 10;
+        }
+
+        .instagram svg {
+            width: 38px;
+            height: 38px;
+
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        .instagram:hover {
+            transform: translateY(-4px) scale(1.08);
+
+            background: #ff6b9d33;
+
+            box-shadow:
+                0 0 20px #ff6b9d99,
+                0 0 45px #ff4f8166;
+        }
+
         .profile {
             text-align: center;
             position: relative;
@@ -67,7 +116,6 @@
             animation: appear 1s ease;
         }
 
-        /* tlačítko Fotky */
         .photos-button {
             display: inline-block;
 
@@ -188,11 +236,38 @@
             h1 {
                 font-size: 36px;
             }
+
+            .instagram {
+                top: 18px;
+                right: 18px;
+                width: 58px;
+                height: 58px;
+            }
+
+            .instagram svg {
+                width: 34px;
+                height: 34px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Instagram -->
+    <a
+        href="https://www.instagram.com/anetous8/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="instagram"
+        aria-label="Instagram Anet"
+    >
+        <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="1"></circle>
+        </svg>
+    </a>
 
     <div class="profile">
 
