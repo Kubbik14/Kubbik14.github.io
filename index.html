@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anet ❤️</title>
+    <title>Anet ❤️ Kuba</title>
 
     <style>
         * {
@@ -42,9 +42,6 @@
             justify-content: center;
             align-items: center;
 
-            color: white;
-            text-decoration: none;
-
             border: 1px solid #ff6b9d88;
             border-radius: 18px;
 
@@ -55,7 +52,6 @@
                 0 0 35px #ff4f8144;
 
             transition: .3s ease;
-
             z-index: 10;
         }
 
@@ -78,21 +74,27 @@
                 0 0 45px #ff4f8166;
         }
 
-        /* Hlavní profil */
+        /* Celý profil */
         .profile {
             text-align: center;
             position: relative;
             z-index: 2;
 
-            transform: translate(70px, -60px);
+            transform: translate(70px, -50px);
         }
 
-        /* Dvě profilové fotky vedle sebe */
+        /* Fotky hodně od sebe */
         .pfps {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 25px;
+            align-items: flex-start;
+
+            gap: 130px;
+        }
+
+        /* Jedna fotka + jméno */
+        .person {
+            text-align: center;
         }
 
         .pfp {
@@ -111,20 +113,22 @@
             animation: appear 1s ease;
         }
 
-        h1 {
-            margin: 20px 0 0;
+        .name {
+            margin-top: 18px;
 
             color: white;
-            font-size: 42px;
+            font-size: 32px;
+            font-weight: bold;
             letter-spacing: 2px;
 
             text-shadow:
                 0 0 10px #ff6b9d,
                 0 0 25px #ff4f81;
 
-            animation: appear 1s ease;
+            animation: appear 1.2s ease;
         }
 
+        /* Srdíčka */
         .heart {
             position: absolute;
 
@@ -196,27 +200,30 @@
             }
         }
 
-        @media (max-width: 600px) {
+        /* Mobil */
+        @media (max-width: 700px) {
+
             .profile {
-                transform: translate(0, -50px);
+                transform: translate(0, -40px);
             }
 
             .pfps {
-                gap: 12px;
+                gap: 35px;
             }
 
             .pfp {
-                width: 155px;
-                height: 155px;
+                width: 150px;
+                height: 150px;
             }
 
-            h1 {
-                font-size: 36px;
+            .name {
+                font-size: 25px;
             }
 
             .instagram {
                 top: 18px;
                 right: 18px;
+
                 width: 58px;
                 height: 58px;
             }
@@ -256,22 +263,28 @@
         <span class="heart">♥</span>
         <span class="heart">♥</span>
 
-        <!-- Dvě profilové fotky -->
+        <!-- Dvě osoby -->
         <div class="pfps">
-            <img
-                class="pfp"
-                src="pfp.png"
-                alt="Anet"
-            >
 
-            <img
-                class="pfp"
-                src="pfp2.png"
-                alt="Anet"
-            >
+            <div class="person">
+                <img
+                    class="pfp"
+                    src="pfp.png"
+                    alt="Anet"
+                >
+                <div class="name">Anet</div>
+            </div>
+
+            <div class="person">
+                <img
+                    class="pfp"
+                    src="pfp2.png"
+                    alt="Kuba"
+                >
+                <div class="name">Kuba</div>
+            </div>
+
         </div>
-
-        <h1>Anet</h1>
 
     </div>
 
