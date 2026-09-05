@@ -26,36 +26,100 @@
                 radial-gradient(circle at 80% 80%, #ff4f8155, transparent 35%),
                 #160b16;
 
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Hlavní profil */
+        /* HLAVNÍ OBSAH */
         .profile {
-            text-align: center;
             position: relative;
             z-index: 2;
 
-            transform: translate(70px, -50px);
+            text-align: center;
+
+            width: 100%;
+            max-width: 1200px;
+
+            transform: translateY(-40px);
         }
 
-        /* Dvě osoby */
+        /* =========================
+           FOTKY
+           ========================= */
+
         .people {
             display: flex;
             justify-content: center;
             align-items: center;
 
-            /* 600 px mezi Anet a Kubou */
-            gap: 600px;
+            gap: 180px;
+
+            transition: gap 1.2s cubic-bezier(.68,-0.55,.27,1.55);
         }
 
-        /* Jedna osoba */
-        .person {
-            display: flex;
-            align-items: center;
+        /* Po kliknutí se fotky přiblíží */
+        .profile.active .people {
             gap: 35px;
         }
 
-        /* Instagram */
+        .person {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            position: relative;
+        }
+
+        .person-info {
+            text-align: center;
+        }
+
+        .pfp {
+            width: 210px;
+            height: 210px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+            border: 5px solid white;
+
+            box-shadow:
+                0 0 20px #ff6b9d,
+                0 0 50px #ff4f8188;
+
+            transition:
+                transform 1.2s ease,
+                box-shadow 1.2s ease;
+        }
+
+        /* Po kliknutí trochu září */
+        .profile.active .pfp {
+            box-shadow:
+                0 0 25px #ff6b9d,
+                0 0 60px #ff4f81,
+                0 0 100px #ff6b9d55;
+        }
+
+        .name {
+            margin-top: 18px;
+
+            color: white;
+
+            font-size: 32px;
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px #ff6b9d,
+                0 0 25px #ff4f81;
+        }
+
+
+        /* =========================
+           INSTAGRAM
+           ========================= */
+
         .instagram {
             width: 65px;
             height: 65px;
@@ -99,108 +163,152 @@
                 0 0 45px #ff4f8166;
         }
 
-        /* Fotka + jméno */
-        .person-info {
-            text-align: center;
-        }
 
-        .pfp {
-            width: 210px;
-            height: 210px;
+        /* =========================
+           TLAČÍTKO
+           ========================= */
 
-            object-fit: cover;
-            border-radius: 50%;
+        .love-button {
+            margin-top: 55px;
 
-            border: 5px solid white;
-
-            box-shadow:
-                0 0 20px #ff6b9d,
-                0 0 50px #ff4f8188;
-
-            animation: appear 1s ease;
-        }
-
-        .name {
-            margin-top: 18px;
+            padding: 14px 35px;
 
             color: white;
-            font-size: 32px;
+
+            font-size: 17px;
             font-weight: bold;
-            letter-spacing: 2px;
 
-            text-shadow:
-                0 0 10px #ff6b9d,
-                0 0 25px #ff4f81;
+            letter-spacing: 1px;
 
-            animation: appear 1.2s ease;
+            border: 1px solid #ff6b9d99;
+            border-radius: 30px;
+
+            background: #ff6b9d18;
+
+            box-shadow:
+                0 0 15px #ff6b9d44;
+
+            cursor: pointer;
+
+            transition: .3s ease;
         }
 
-        /* Srdíčka */
+        .love-button:hover {
+            transform: scale(1.07);
+
+            background: #ff6b9d33;
+
+            box-shadow:
+                0 0 20px #ff6b9d99,
+                0 0 45px #ff4f8155;
+        }
+
+        .profile.active .love-button {
+            background: #ff6b9d33;
+
+            box-shadow:
+                0 0 20px #ff6b9d99,
+                0 0 50px #ff4f8166;
+        }
+
+
+        /* =========================
+           SRDÍČKA
+           ========================= */
+
+        .hearts {
+            position: absolute;
+
+            left: 50%;
+            top: 40%;
+
+            width: 500px;
+            height: 300px;
+
+            transform: translate(-50%, -50%);
+
+            pointer-events: none;
+
+            opacity: 0;
+
+            transition: opacity .5s ease;
+        }
+
+        .profile.active .hearts {
+            opacity: 1;
+        }
+
         .heart {
             position: absolute;
 
             color: #ff6b9d;
-            font-size: 28px;
 
-            animation: float 3s ease-in-out infinite;
+            font-size: 30px;
 
-            text-shadow: 0 0 15px #ff4f81;
+            text-shadow:
+                0 0 10px #ff4f81,
+                0 0 25px #ff6b9d;
+
+            opacity: 0;
+        }
+
+        .profile.active .heart {
+            animation: heartAppear 1.5s ease forwards,
+                       float 3s ease-in-out infinite;
         }
 
         .heart:nth-child(1) {
-            top: -30px;
-            left: -50px;
-            animation-delay: 0s;
+            left: 5%;
+            top: 35%;
+            animation-delay: .1s;
         }
 
         .heart:nth-child(2) {
-            top: 40px;
-            right: -60px;
-            animation-delay: .5s;
+            left: 20%;
+            top: 5%;
+            animation-delay: .25s;
         }
 
         .heart:nth-child(3) {
-            bottom: 80px;
-            left: -75px;
-            animation-delay: 1s;
+            left: 40%;
+            top: 45%;
+            animation-delay: .4s;
         }
 
         .heart:nth-child(4) {
-            bottom: 20px;
-            right: -65px;
-            animation-delay: 1.5s;
+            left: 60%;
+            top: 10%;
+            animation-delay: .55s;
         }
 
         .heart:nth-child(5) {
-            top: -60px;
-            right: 10px;
-            font-size: 20px;
-            animation-delay: .8s;
+            left: 78%;
+            top: 40%;
+            animation-delay: .7s;
         }
 
         .heart:nth-child(6) {
-            bottom: -40px;
-            left: 30px;
-            font-size: 22px;
-            animation-delay: 1.8s;
+            left: 90%;
+            top: 15%;
+            animation-delay: .85s;
         }
 
-        /* Animace srdíček */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) scale(1);
-            }
-
-            50% {
-                transform: translateY(-15px) scale(1.15);
-            }
+        .heart:nth-child(7) {
+            left: 30%;
+            top: 80%;
+            animation-delay: 1s;
         }
 
-        /* Animace objevení */
-        @keyframes appear {
+        .heart:nth-child(8) {
+            left: 70%;
+            top: 75%;
+            animation-delay: 1.15s;
+        }
+
+        @keyframes heartAppear {
             from {
                 opacity: 0;
-                transform: scale(.7);
+                transform: scale(0);
             }
 
             to {
@@ -209,127 +317,126 @@
             }
         }
 
-
-        /* =========================================
-           TABLET / MENŠÍ NOTEBOOK
-           ========================================= */
-
-        @media (max-width: 1100px) {
-
-            .profile {
-                transform: translate(0, -40px);
+        @keyframes float {
+            0%, 100% {
+                margin-top: 0;
             }
 
-            .people {
-                gap: 200px;
-            }
-
-            .pfp {
-                width: 180px;
-                height: 180px;
-            }
-
-            .person {
-                gap: 20px;
+            50% {
+                margin-top: -12px;
             }
         }
 
 
-        /* =========================================
+        /* =========================
            MOBIL
-           ========================================= */
+           ========================= */
 
         @media (max-width: 700px) {
 
-            body {
-                min-height: 100vh;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-
             .profile {
-                width: 100%;
-                transform: translate(0, -20px);
+                transform: translateY(-20px);
+
+                padding: 0 10px;
             }
 
             /*
-             * Na mobilu už nechceme 600 px.
-             * Anet a Kuba budou pod sebou.
+             * Pořád vedle sebe,
+             * nikdy ne pod sebou.
              */
-            .people {
-                flex-direction: column;
-                gap: 45px;
-            }
-
-            .person {
-                gap: 18px;
-            }
-
-            .pfp {
-                width: 145px;
-                height: 145px;
-            }
-
-            .instagram {
-                width: 52px;
-                height: 52px;
-                border-radius: 15px;
-            }
-
-            .instagram svg {
-                width: 30px;
-                height: 30px;
-            }
-
-            .name {
-                margin-top: 12px;
-                font-size: 25px;
-                letter-spacing: 1px;
-            }
-
-            .heart {
-                font-size: 22px;
-            }
-        }
-
-
-        /* =========================================
-           MALÝ MOBIL
-           ========================================= */
-
-        @media (max-width: 450px) {
-
-            .profile {
-                transform: translate(0, -10px);
-            }
-
             .people {
                 gap: 35px;
             }
 
+            .profile.active .people {
+                gap: 5px;
+            }
+
             .person {
-                gap: 12px;
+                gap: 10px;
             }
 
             .pfp {
-                width: 120px;
-                height: 120px;
+                width: 125px;
+                height: 125px;
+
                 border-width: 4px;
+            }
+
+            .name {
+                font-size: 22px;
+                margin-top: 12px;
+                letter-spacing: 1px;
             }
 
             .instagram {
                 width: 45px;
                 height: 45px;
+
                 border-radius: 13px;
             }
 
             .instagram svg {
-                width: 26px;
-                height: 26px;
+                width: 27px;
+                height: 27px;
+            }
+
+            .love-button {
+                margin-top: 40px;
+
+                padding: 13px 28px;
+
+                font-size: 15px;
+            }
+
+            .hearts {
+                width: 350px;
+                height: 250px;
+            }
+
+            .heart {
+                font-size: 23px;
+            }
+        }
+
+
+        /* EXTRA MALÝ TELEFON */
+
+        @media (max-width: 430px) {
+
+            .people {
+                gap: 20px;
+            }
+
+            .profile.active .people {
+                gap: 0;
+            }
+
+            .person {
+                gap: 7px;
+            }
+
+            .pfp {
+                width: 105px;
+                height: 105px;
+            }
+
+            .instagram {
+                width: 38px;
+                height: 38px;
+            }
+
+            .instagram svg {
+                width: 23px;
+                height: 23px;
             }
 
             .name {
-                font-size: 22px;
+                font-size: 19px;
+            }
+
+            .love-button {
+                margin-top: 30px;
             }
         }
 
@@ -338,20 +445,34 @@
 
 <body>
 
-    <div class="profile">
+    <div class="profile" id="profile">
 
-        <!-- Srdíčka -->
-        <span class="heart">♥</span>
-        <span class="heart">♥</span>
-        <span class="heart">♥</span>
-        <span class="heart">♥</span>
-        <span class="heart">♥</span>
-        <span class="heart">♥</span>
+        <!-- =========================
+             SRDÍČKA
+             ========================= -->
 
+        <div class="hearts">
+
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+            <span class="heart">♥</span>
+
+        </div>
+
+
+        <!-- =========================
+             ANET + KUBA
+             ========================= -->
 
         <div class="people">
 
-            <!-- ================= ANET ================= -->
+
+            <!-- ANET -->
 
             <div class="person">
 
@@ -364,11 +485,28 @@
                     aria-label="Instagram Anet"
                 >
                     <svg viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <circle cx="17.5" cy="6.5" r="1"></circle>
+                        <rect
+                            x="3"
+                            y="3"
+                            width="18"
+                            height="18"
+                            rx="5">
+                        </rect>
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="4">
+                        </circle>
+
+                        <circle
+                            cx="17.5"
+                            cy="6.5"
+                            r="1">
+                        </circle>
                     </svg>
                 </a>
+
 
                 <div class="person-info">
 
@@ -387,7 +525,7 @@
             </div>
 
 
-            <!-- ================= KUBA ================= -->
+            <!-- KUBA -->
 
             <div class="person">
 
@@ -415,9 +553,25 @@
                     aria-label="Instagram Kuba"
                 >
                     <svg viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-                        <circle cx="12" cy="12" r="4"></circle>
-                        <circle cx="17.5" cy="6.5" r="1"></circle>
+                        <rect
+                            x="3"
+                            y="3"
+                            width="18"
+                            height="18"
+                            rx="5">
+                        </rect>
+
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="4">
+                        </circle>
+
+                        <circle
+                            cx="17.5"
+                            cy="6.5"
+                            r="1">
+                        </circle>
                     </svg>
                 </a>
 
@@ -425,7 +579,32 @@
 
         </div>
 
+
+        <!-- =========================
+             TLAČÍTKO
+             ========================= -->
+
+        <button
+            class="love-button"
+            onclick="showLove()"
+        >
+            ❤️ Klikni na mě
+        </button>
+
     </div>
+
+
+    <script>
+
+        function showLove() {
+
+            const profile = document.getElementById("profile");
+
+            profile.classList.toggle("active");
+
+        }
+
+    </script>
 
 </body>
 </html>
