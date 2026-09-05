@@ -4,605 +4,1531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anet ❤️ Kuba</title>
+
+    <title>Kuba | Portfolio</title>
 
     <style>
+        /* =====================================================
+           ZÁKLAD
+        ===================================================== */
+
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --pink: #ff4f81;
+            --light-pink: #ff8fb3;
+            --dark: #09060a;
+            --card: rgba(255, 79, 129, 0.07);
+            --border: rgba(255, 143, 179, 0.25);
+            --white: #ffffff;
+            --gray: #bdb6bd;
         }
 
         body {
-            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--white);
+            background:
+                radial-gradient(circle at 10% 10%, #ff4f8130, transparent 30%),
+                radial-gradient(circle at 90% 20%, #ff8fb322, transparent 25%),
+                radial-gradient(circle at 50% 90%, #ff4f8120, transparent 35%),
+                var(--dark);
+
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           POZADÍ
+        ===================================================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: .25;
+            animation: moveOrb 10s ease-in-out infinite alternate;
+        }
+
+        .orb.one {
+            width: 300px;
+            height: 300px;
+            background: var(--pink);
+            left: -100px;
+            top: 20%;
+        }
+
+        .orb.two {
+            width: 350px;
+            height: 350px;
+            background: #ff8fb3;
+            right: -120px;
+            top: 55%;
+            animation-delay: -3s;
+        }
+
+        .orb.three {
+            width: 200px;
+            height: 200px;
+            background: var(--pink);
+            left: 45%;
+            top: -100px;
+            animation-delay: -6s;
+        }
+
+        @keyframes moveOrb {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(70px, -50px) scale(1.2);
+            }
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 22px 7%;
+
+            background: rgba(9, 6, 10, .65);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.05);
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px var(--pink),
+                0 0 25px var(--pink);
+        }
+
+        .logo span {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ddd;
+            font-size: 14px;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink);
+            text-shadow: 0 0 10px var(--pink);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        section {
+            width: 100%;
+            padding: 110px 7%;
+        }
+
+        .hero {
             min-height: 100vh;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            font-family: Arial, sans-serif;
-
-            background:
-                radial-gradient(circle at 20% 20%, #ff6b9d55, transparent 35%),
-                radial-gradient(circle at 80% 80%, #ff4f8155, transparent 35%),
-                #160b16;
-
-            overflow: hidden;
+            padding-top: 130px;
         }
 
-        /* HLAVNÍ OBSAH */
-        .profile {
-            position: relative;
-            z-index: 2;
-
-            text-align: center;
-
+        .hero-content {
             width: 100%;
             max-width: 1200px;
 
-            transform: translateY(-40px);
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            align-items: center;
+            gap: 70px;
         }
 
-        /* =========================
-           FOTKY
-           ========================= */
+        .small-title {
+            color: var(--pink);
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
 
-        .people {
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 8vw, 105px);
+            line-height: .95;
+            margin-bottom: 25px;
+
+            text-shadow:
+                0 0 15px rgba(255,79,129,.35);
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+
+            text-shadow:
+                0 0 10px var(--pink),
+                0 0 40px rgba(255,79,129,.7);
+        }
+
+        .hero-description {
+            max-width: 600px;
+
+            color: var(--gray);
+            font-size: 18px;
+            line-height: 1.7;
+
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+
+            border-radius: 30px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+
+            color: white;
+            font-weight: bold;
+
+            transition: .3s;
+
+            box-shadow: 0 0 20px rgba(255,79,129,.1);
+        }
+
+        .btn.primary {
+            background: var(--pink);
+            border-color: var(--pink);
+
+            box-shadow:
+                0 0 20px rgba(255,79,129,.45);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.03);
+
+            box-shadow:
+                0 0 25px rgba(255,79,129,.45);
+        }
+
+
+        /* =====================================================
+           PROFILOVKA
+        ===================================================== */
+
+        .hero-photo {
             display: flex;
             justify-content: center;
             align-items: center;
-
-            gap: 600px;
-
-            transition: gap 1.2s cubic-bezier(.68,-0.55,.27,1.55);
         }
 
-        /* Po kliknutí se fotky přiblíží */
-        .profile.active .people {
-            gap: 35px;
-        }
-
-        .person {
-            display: flex;
-            align-items: center;
-
-            gap: 30px;
-
+        .photo-container {
             position: relative;
         }
 
-        .person-info {
-            text-align: center;
+        .photo-ring {
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            padding: 7px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--pink),
+                    transparent 40%,
+                    var(--light-pink),
+                    var(--pink)
+                );
+
+            box-shadow:
+                0 0 30px rgba(255,79,129,.45),
+                0 0 100px rgba(255,79,129,.15);
+
+            animation: photoFloat 4s ease-in-out infinite;
         }
 
-        .pfp {
-            width: 210px;
-            height: 210px;
+        .photo-ring img {
+            width: 100%;
+            height: 100%;
 
             object-fit: cover;
 
             border-radius: 50%;
-            border: 5px solid white;
 
-            box-shadow:
-                0 0 20px #ff6b9d,
-                0 0 50px #ff4f8188;
-
-            transition:
-                transform 1.2s ease,
-                box-shadow 1.2s ease;
+            border: 6px solid var(--dark);
         }
 
-        /* Po kliknutí trochu září */
-        .profile.active .pfp {
-            box-shadow:
-                0 0 25px #ff6b9d,
-                0 0 60px #ff4f81,
-                0 0 100px #ff6b9d55;
-        }
+        .photo-heart {
+            position: absolute;
 
-        .name {
-            margin-top: 18px;
+            right: -15px;
+            bottom: 15px;
 
-            color: white;
-
-            font-size: 32px;
-            font-weight: bold;
-
-            letter-spacing: 2px;
-
-            text-shadow:
-                0 0 10px #ff6b9d,
-                0 0 25px #ff4f81;
-        }
-
-
-        /* =========================
-           INSTAGRAM
-           ========================= */
-
-        .instagram {
-            width: 65px;
-            height: 65px;
-
-            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            border: 1px solid #ff6b9d88;
-            border-radius: 18px;
+            border-radius: 50%;
 
-            background: #ff6b9d18;
-
-            box-shadow:
-                0 0 15px #ff6b9d66,
-                0 0 35px #ff4f8144;
-
-            transition: .3s ease;
-
-            text-decoration: none;
-        }
-
-        .instagram svg {
-            width: 38px;
-            height: 38px;
-
-            fill: none;
-            stroke: white;
-            stroke-width: 2;
-        }
-
-        .instagram:hover {
-            transform: scale(1.1);
-
-            background: #ff6b9d33;
-
-            box-shadow:
-                0 0 20px #ff6b9d99,
-                0 0 45px #ff4f8166;
-        }
-
-
-        /* =========================
-           TLAČÍTKO
-           ========================= */
-
-        .love-button {
-            margin-top: 55px;
-
-            padding: 14px 35px;
-
-            color: white;
-
-            font-size: 17px;
-            font-weight: bold;
-
-            letter-spacing: 1px;
-
-            border: 1px solid #ff6b9d99;
-            border-radius: 30px;
-
-            background: #ff6b9d18;
-
-            box-shadow:
-                0 0 15px #ff6b9d44;
-
-            cursor: pointer;
-
-            transition: .3s ease;
-        }
-
-        .love-button:hover {
-            transform: scale(1.07);
-
-            background: #ff6b9d33;
-
-            box-shadow:
-                0 0 20px #ff6b9d99,
-                0 0 45px #ff4f8155;
-        }
-
-        .profile.active .love-button {
-            background: #ff6b9d33;
-
-            box-shadow:
-                0 0 20px #ff6b9d99,
-                0 0 50px #ff4f8166;
-        }
-
-
-        /* =========================
-           SRDÍČKA
-           ========================= */
-
-        .hearts {
-            position: absolute;
-
-            left: 50%;
-            top: 40%;
-
-            width: 500px;
-            height: 300px;
-
-            transform: translate(-50%, -50%);
-
-            pointer-events: none;
-
-            opacity: 0;
-
-            transition: opacity .5s ease;
-        }
-
-        .profile.active .hearts {
-            opacity: 1;
-        }
-
-        .heart {
-            position: absolute;
-
-            color: #ff6b9d;
+            background: var(--pink);
 
             font-size: 30px;
 
-            text-shadow:
-                0 0 10px #ff4f81,
-                0 0 25px #ff6b9d;
+            box-shadow:
+                0 0 20px var(--pink),
+                0 0 50px rgba(255,79,129,.6);
 
-            opacity: 0;
+            animation: heartPulse 1.8s infinite;
         }
 
-        .profile.active .heart {
-            animation: heartAppear 1.5s ease forwards,
-                       float 3s ease-in-out infinite;
-        }
-
-        .heart:nth-child(1) {
-            left: 5%;
-            top: 35%;
-            animation-delay: .1s;
-        }
-
-        .heart:nth-child(2) {
-            left: 20%;
-            top: 5%;
-            animation-delay: .25s;
-        }
-
-        .heart:nth-child(3) {
-            left: 40%;
-            top: 45%;
-            animation-delay: .4s;
-        }
-
-        .heart:nth-child(4) {
-            left: 60%;
-            top: 10%;
-            animation-delay: .55s;
-        }
-
-        .heart:nth-child(5) {
-            left: 78%;
-            top: 40%;
-            animation-delay: .7s;
-        }
-
-        .heart:nth-child(6) {
-            left: 90%;
-            top: 15%;
-            animation-delay: .85s;
-        }
-
-        .heart:nth-child(7) {
-            left: 30%;
-            top: 80%;
-            animation-delay: 1s;
-        }
-
-        .heart:nth-child(8) {
-            left: 70%;
-            top: 75%;
-            animation-delay: 1.15s;
-        }
-
-        @keyframes heartAppear {
-            from {
-                opacity: 0;
-                transform: scale(0);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes float {
+        @keyframes photoFloat {
             0%, 100% {
-                margin-top: 0;
+                transform: translateY(0);
             }
 
             50% {
-                margin-top: -12px;
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.12);
             }
         }
 
 
-        /* =========================
-           MOBIL
-           ========================= */
+        /* =====================================================
+           NADPIS SEKCE
+        ===================================================== */
 
-        @media (max-width: 700px) {
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
 
-            .profile {
-                transform: translateY(-20px);
+        .section-title small {
+            color: var(--pink);
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
 
-                padding: 0 10px;
+        .section-title h2 {
+            margin-top: 10px;
+            font-size: 42px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            margin-top: 12px;
+        }
+
+
+        /* =====================================================
+           O MNĚ
+        ===================================================== */
+
+        .about {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            padding: 30px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 25px;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 0 30px rgba(255,79,129,.05);
+
+            transition: .35s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(255,143,179,.5);
+
+            box-shadow:
+                0 15px 45px rgba(255,79,129,.12);
+        }
+
+        .card h3 {
+            color: var(--pink);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           DOVEDNOSTI
+        ===================================================== */
+
+        .skills {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .skill {
+            padding: 22px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            transition: .3s;
+        }
+
+        .skill:hover {
+            transform: translateX(7px);
+            border-color: var(--pink);
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+
+            font-weight: bold;
+        }
+
+        .skill-top span:last-child {
+            color: var(--pink);
+        }
+
+        .bar {
+            height: 7px;
+
+            background: rgba(255,255,255,.08);
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                var(--pink),
+                var(--light-pink)
+            );
+
+            border-radius: 10px;
+
+            box-shadow: 0 0 12px var(--pink);
+        }
+
+        .html {
+            width: 90%;
+        }
+
+        .css {
+            width: 85%;
+        }
+
+        .js {
+            width: 65%;
+        }
+
+        .web {
+            width: 90%;
+        }
+
+
+        /* =====================================================
+           PROJEKTY
+        ===================================================== */
+
+        .projects {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            position: relative;
+
+            padding: 30px;
+
+            min-height: 230px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,79,129,.12),
+                    rgba(255,255,255,.025)
+                );
+
+            border: 1px solid var(--border);
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            transition: .4s;
+        }
+
+        .project::before {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            border-radius: 50%;
+
+            background: var(--pink);
+
+            filter: blur(80px);
+
+            opacity: .1;
+
+            right: -70px;
+            bottom: -70px;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+
+            border-color: var(--pink);
+
+            box-shadow:
+                0 20px 50px rgba(255,79,129,.15);
+        }
+
+        .project-number {
+            color: var(--pink);
+
+            font-size: 13px;
+            font-weight: bold;
+
+            letter-spacing: 3px;
+        }
+
+        .project h3 {
+            margin: 18px 0 12px;
+
+            font-size: 25px;
+        }
+
+        .project p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .project-button {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            color: var(--pink);
+
+            font-weight: bold;
+
+            transition: .3s;
+        }
+
+        .project-button:hover {
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           SOCIÁLNÍ SÍTĚ
+        ===================================================== */
+
+        .social {
+            max-width: 800px;
+            margin: auto;
+
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
+            min-width: 230px;
+
+            padding: 22px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background: var(--card);
+
+            transition: .3s;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+
+            border-color: var(--pink);
+
+            box-shadow:
+                0 0 30px rgba(255,79,129,.2);
+        }
+
+        .social-icon {
+            font-size: 28px;
+        }
+
+        .social-card div strong {
+            display: block;
+        }
+
+        .social-card div span {
+            display: block;
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            margin-top: 4px;
+        }
+
+
+        /* =====================================================
+           KONTAKT
+        ===================================================== */
+
+        .contact {
+            max-width: 800px;
+            margin: auto;
+
+            text-align: center;
+        }
+
+        .contact-box {
+            padding: 50px 30px;
+
+            border: 1px solid var(--border);
+            border-radius: 30px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,79,129,.12),
+                    transparent 60%
+                );
+
+            box-shadow:
+                0 0 50px rgba(255,79,129,.07);
+        }
+
+        .contact-box h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            padding: 35px 7%;
+
+            text-align: center;
+
+            color: #777;
+
+            border-top: 1px solid rgba(255,255,255,.05);
+        }
+
+        footer span {
+            color: var(--pink);
+        }
+
+
+        /* =====================================================
+           SRDÍČKA
+        ===================================================== */
+
+        .floating-hearts {
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 0;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+
+            bottom: -50px;
+
+            color: var(--pink);
+
+            opacity: .35;
+
+            font-size: 20px;
+
+            animation: floatHeart linear infinite;
+        }
+
+        .floating-hearts span:nth-child(1) {
+            left: 10%;
+            animation-duration: 9s;
+            animation-delay: 1s;
+        }
+
+        .floating-hearts span:nth-child(2) {
+            left: 25%;
+            animation-duration: 12s;
+            animation-delay: 4s;
+        }
+
+        .floating-hearts span:nth-child(3) {
+            left: 45%;
+            animation-duration: 8s;
+            animation-delay: 2s;
+        }
+
+        .floating-hearts span:nth-child(4) {
+            left: 65%;
+            animation-duration: 11s;
+            animation-delay: 5s;
+        }
+
+        .floating-hearts span:nth-child(5) {
+            left: 82%;
+            animation-duration: 10s;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
             }
 
-            /*
-             * Pořád vedle sebe,
-             * nikdy ne pod sebou.
-             */
-            .people {
-                gap: 35px;
+            15% {
+                opacity: .35;
             }
 
-            .profile.active .people {
-                gap: 5px;
+            85% {
+                opacity: .35;
             }
 
-            .person {
-                gap: 10px;
-            }
-
-            .pfp {
-                width: 125px;
-                height: 125px;
-
-                border-width: 4px;
-            }
-
-            .name {
-                font-size: 22px;
-                margin-top: 12px;
-                letter-spacing: 1px;
-            }
-
-            .instagram {
-                width: 45px;
-                height: 45px;
-
-                border-radius: 13px;
-            }
-
-            .instagram svg {
-                width: 27px;
-                height: 27px;
-            }
-
-            .love-button {
-                margin-top: 40px;
-
-                padding: 13px 28px;
-
-                font-size: 15px;
-            }
-
-            .hearts {
-                width: 350px;
-                height: 250px;
-            }
-
-            .heart {
-                font-size: 23px;
+            100% {
+                transform: translateY(-110vh) rotate(25deg);
+                opacity: 0;
             }
         }
 
 
-        /* EXTRA MALÝ TELEFON */
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
 
-        @media (max-width: 430px) {
+        @media (max-width: 900px) {
 
-            .people {
-                gap: 20px;
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
 
-            .profile.active .people {
-                gap: 0;
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
             }
 
-            .person {
-                gap: 7px;
+            .buttons {
+                justify-content: center;
             }
 
-            .pfp {
-                width: 105px;
-                height: 105px;
+            .hero-photo {
+                order: -1;
             }
 
-            .instagram {
-                width: 38px;
-                height: 38px;
+            .photo-ring {
+                width: 260px;
+                height: 260px;
             }
 
-            .instagram svg {
-                width: 23px;
-                height: 23px;
+            .about {
+                grid-template-columns: 1fr;
             }
 
-            .name {
+            .projects {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            nav {
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .logo {
                 font-size: 19px;
             }
 
-            .love-button {
-                margin-top: 30px;
+            section {
+                padding: 85px 5%;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .photo-ring {
+                width: 220px;
+                height: 220px;
+            }
+
+            .photo-heart {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .social-card {
+                width: 100%;
+            }
+        }
+
+
+        @media (max-width: 430px) {
+
+            .nav-links a:nth-child(3) {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 47px;
+            }
+
+            .small-title {
+                font-size: 12px;
+            }
+
+            .photo-ring {
+                width: 190px;
+                height: 190px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
 
     </style>
 </head>
 
+
 <body>
 
-    <div class="profile" id="profile">
+    <!-- =====================================================
+         POZADÍ
+    ===================================================== -->
 
-        <!-- =========================
-             SRDÍČKA
-             ========================= -->
+    <div class="background">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+    </div>
 
-        <div class="hearts">
 
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
-            <span class="heart">♥</span>
+    <!-- =====================================================
+         PLUJÍCÍ SRDÍČKA
+    ===================================================== -->
 
+    <div class="floating-hearts">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGACE
+    ===================================================== -->
+
+    <nav>
+
+        <div class="logo">
+            KUBA<span>.</span>
         </div>
 
+        <ul class="nav-links">
+            <li>
+                <a href="#home">HOME</a>
+            </li>
 
-        <!-- =========================
-             ANET + KUBA
-             ========================= -->
+            <li>
+                <a href="#about">O MNĚ</a>
+            </li>
 
-        <div class="people">
+            <li>
+                <a href="#skills">SKILLS</a>
+            </li>
 
+            <li>
+                <a href="#projects">PROJEKTY</a>
+            </li>
+        </ul>
 
-            <!-- ANET -->
-
-            <div class="person">
-
-                <!-- Instagram Anet -->
-                <a
-                    href="https://www.instagram.com/anetous8/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="instagram"
-                    aria-label="Instagram Anet"
-                >
-                    <svg viewBox="0 0 24 24">
-                        <rect
-                            x="3"
-                            y="3"
-                            width="18"
-                            height="18"
-                            rx="5">
-                        </rect>
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="4">
-                        </circle>
-
-                        <circle
-                            cx="17.5"
-                            cy="6.5"
-                            r="1">
-                        </circle>
-                    </svg>
-                </a>
+    </nav>
 
 
-                <div class="person-info">
+    <!-- =====================================================
+         HOME
+    ===================================================== -->
 
-                    <img
-                        class="pfp"
-                        src="pfp.png"
-                        alt="Anet"
-                    >
+    <section class="hero" id="home">
 
-                    <div class="name">
-                        Anet
-                    </div>
+        <div class="hero-content">
+
+            <div>
+
+                <div class="small-title">
+                    WEB • CODE • DESIGN
+                </div>
+
+                <h1>
+                    Ahoj, jsem<br>
+                    <span>Kuba.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Tohle je moje osobní portfolio.
+                    Baví mě tvořit weby, experimentovat s HTML,
+                    CSS a JavaScriptem a dělat věci, které vypadají
+                    trochu jinak než obyčejné stránky.
+                </p>
+
+                <div class="buttons">
+
+                    <a href="#projects" class="btn primary">
+                        🚀 Moje projekty
+                    </a>
+
+                    <a href="#contact" class="btn">
+                        💬 Kontakt
+                    </a>
 
                 </div>
 
             </div>
 
 
-            <!-- KUBA -->
+            <!-- PROFILOVKA -->
 
-            <div class="person">
+            <div class="hero-photo">
 
-                <div class="person-info">
+                <div class="photo-container">
 
-                    <img
-                        class="pfp"
-                        src="pfp2.png"
-                        alt="Kuba"
-                    >
+                    <div class="photo-ring">
 
-                    <div class="name">
-                        Kuba
+                        <img
+                            src="pfp2.png"
+                            alt="Kuba"
+                        >
+
+                    </div>
+
+                    <div class="photo-heart">
+                        ❤️
                     </div>
 
                 </div>
 
+            </div>
 
-                <!-- Instagram Kuba -->
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         O MNĚ
+    ===================================================== -->
+
+    <section id="about">
+
+        <div class="section-title">
+
+            <small>WHO AM I?</small>
+
+            <h2>Něco o mně</h2>
+
+            <p>
+                Pár věcí, které mě vystihují.
+            </p>
+
+        </div>
+
+
+        <div class="about">
+
+            <div class="card">
+
+                <h3>💻 Tvorba webů</h3>
+
+                <p>
+                    Nejvíc mě baví vytvářet vlastní webové stránky
+                    a postupně je vylepšovat. Rád si hraju s designem,
+                    animacemi, tlačítky a různými efekty.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🎨 Design</h3>
+
+                <p>
+                    Nemám rád obyčejné stránky. Baví mě moderní
+                    tmavý design, neonové efekty, glow, animace
+                    a celkově výrazný vzhled.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🚀 Neustále zkouším nové věci</h3>
+
+                <p>
+                    Každý projekt je pro mě možnost naučit se něco
+                    nového. Od jednoduchých HTML stránek až po
+                    interaktivní JavaScript.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>❤️ Moje projekty</h3>
+
+                <p>
+                    Projekty tvořím hlavně pro zábavu, učení a jako
+                    způsob, jak si vyzkoušet vlastní nápady
+                    a proměnit je v něco skutečného.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DOVEDNOSTI
+    ===================================================== -->
+
+    <section id="skills">
+
+        <div class="section-title">
+
+            <small>MY SKILLS</small>
+
+            <h2>Co umím</h2>
+
+            <p>
+                Technologie, se kterými si hraju.
+            </p>
+
+        </div>
+
+
+        <div class="skills">
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>HTML</span>
+                    <span>90%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress html"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>CSS</span>
+                    <span>85%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress css"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>JavaScript</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress js"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-top">
+                    <span>Web Design</span>
+                    <span>90%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress web"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROJEKTY
+    ===================================================== -->
+
+    <section id="projects">
+
+        <div class="section-title">
+
+            <small>MY WORK</small>
+
+            <h2>Moje projekty</h2>
+
+            <p>
+                Některé věci, které jsem vytvořil.
+            </p>
+
+        </div>
+
+
+        <div class="projects">
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>❤️ Anet & Kuba</h3>
+
+                <p>
+                    Osobní web s profilovými fotkami,
+                    Instagram odkazy, animacemi a srdíčky.
+                </p>
+
+                <a href="#" class="project-button">
+                    Zobrazit projekt →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>🌐 Web Portfolio</h3>
+
+                <p>
+                    Moje vlastní portfolio vytvořené pomocí
+                    HTML, CSS a JavaScriptu.
+                </p>
+
+                <a href="#home" class="project-button">
+                    Právě se díváš →
+                </a>
+
+            </div>
+
+
+            <div class="project">
+
+                <div class="project-number">
+                    PROJECT 03
+                </div>
+
+                <h3>⚡ Další projekt</h3>
+
+                <p>
+                    Tady může později přibýt další web,
+                    hra nebo jiný projekt, který vytvořím.
+                </p>
+
+                <a href="#contact" class="project-button">
+                    Brzy →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SOCIÁLNÍ SÍTĚ
+    ===================================================== -->
+
+    <section>
+
+        <div class="section-title">
+
+            <small>FIND ME</small>
+
+            <h2>Sociální sítě</h2>
+
+        </div>
+
+
+        <div class="social">
+
+            <a
+                href="https://www.instagram.com/kubiq.a/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-card"
+            >
+
+                <div class="social-icon">
+                    📸
+                </div>
+
+                <div>
+                    <strong>Instagram</strong>
+                    <span>@kubiq.a</span>
+                </div>
+
+            </a>
+
+
+            <a
+                href="https://www.instagram.com/anetous8/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-card"
+            >
+
+                <div class="social-icon">
+                    ❤️
+                </div>
+
+                <div>
+                    <strong>Anet</strong>
+                    <span>@anetous8</span>
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         KONTAKT
+    ===================================================== -->
+
+    <section id="contact">
+
+        <div class="contact">
+
+            <div class="contact-box">
+
+                <h2>Chceš něco vytvořit?</h2>
+
+                <p>
+                    Pokud máš nějaký nápad na web nebo projekt,
+                    můžeš mě najít na Instagramu.
+                </p>
+
                 <a
                     href="https://www.instagram.com/kubiq.a/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="instagram"
-                    aria-label="Instagram Kuba"
+                    class="btn primary"
                 >
-                    <svg viewBox="0 0 24 24">
-                        <rect
-                            x="3"
-                            y="3"
-                            width="18"
-                            height="18"
-                            rx="5">
-                        </rect>
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="4">
-                        </circle>
-
-                        <circle
-                            cx="17.5"
-                            cy="6.5"
-                            r="1">
-                        </circle>
-                    </svg>
+                    📸 Napsat na Instagram
                 </a>
 
             </div>
 
         </div>
 
+    </section>
 
-        <!-- =========================
-             TLAČÍTKO
-             ========================= -->
 
-        <button
-            class="love-button"
-            onclick="showLove()"
-        >
-            ❤️ Klikni na mě
-        </button>
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
 
-    </div>
+    <footer>
 
+        Vytvořil <span>Kuba</span> ❤️
+
+        <br>
+
+        <small>
+            HTML • CSS • JavaScript
+        </small>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
 
     <script>
 
-        function showLove() {
+        /* =========================================
+           ANIMACE PŘI SCROLLU
+        ========================================= */
 
-            const profile = document.getElementById("profile");
+        const cards = document.querySelectorAll(
+            ".card, .skill, .project, .social-card, .contact-box"
+        );
 
-            profile.classList.toggle("active");
+        const observer = new IntersectionObserver(
+            (entries) => {
 
-        }
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+        cards.forEach(card => {
+
+            card.style.opacity = "0";
+            card.style.transform = "translateY(30px)";
+            card.style.transition = "opacity .7s ease, transform .7s ease";
+
+            observer.observe(card);
+
+        });
+
+
+        /* =========================================
+           NAVBAR - AKTIVNÍ ODKAZ
+        ========================================= */
+
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-links a");
+
+        window.addEventListener("scroll", () => {
+
+            let current = "";
+
+            sections.forEach(section => {
+
+                const sectionTop = section.offsetTop - 150;
+
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+
+            });
+
+            navLinks.forEach(link => {
+
+                link.style.color = "";
+
+                if (link.getAttribute("href") === "#" + current) {
+                    link.style.color = "var(--pink)";
+                }
+
+            });
+
+        });
+
+
+        /* =========================================
+           EFEKT NA MYŠI
+        ========================================= */
+
+        document.addEventListener("mousemove", (e) => {
+
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            document.querySelector(".orb.one").style.transform =
+                `translate(${x * 40}px, ${y * 30}px)`;
+
+            document.querySelector(".orb.two").style.transform =
+                `translate(${-x * 40}px, ${-y * 30}px)`;
+
+        });
 
     </script>
 
