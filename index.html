@@ -6,222 +6,254 @@
 
     <title>Kuba</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(255, 0, 128, 0.25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(140, 0, 255, 0.25),
+                    transparent 35%
+                ),
+                #0b0710;
 
             display: flex;
             justify-content: center;
-            align-items: center;
-
-            background:
-                radial-gradient(circle at center, #ff4f8140, transparent 45%),
-                #120912;
-
-            font-family: Arial, sans-serif;
+            padding: 50px 20px;
         }
 
-        .profile {
-            width: 420px;
-            max-width: 90%;
+        /* Instagram */
 
+        .instagram {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            backdrop-filter: blur(10px);
+
+            color: white;
+            text-decoration: none;
+
+            transition: 0.3s ease;
+        }
+
+        .instagram:hover {
+            transform: translateY(-3px) scale(1.05);
+
+            background: linear-gradient(
+                135deg,
+                #ff0080,
+                #7928ff
+            );
+
+            box-shadow:
+                0 10px 30px rgba(255, 0, 128, 0.3);
+        }
+
+        .instagram svg {
+            width: 25px;
+            height: 25px;
+        }
+
+        /* Container */
+
+        .container {
+            width: 100%;
+            max-width: 900px;
             text-align: center;
 
-            transform: translateY(-60px);
+            animation: fadeIn 1s ease;
         }
 
-        /* =========================
-           PROFILOVKA
-        ========================= */
+        /* Profile */
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin-bottom: 45px;
+        }
 
         .profile img {
-            width: 230px;
-            height: 230px;
+            width: 145px;
+            height: 145px;
 
             object-fit: cover;
 
             border-radius: 50%;
-            border: 5px solid white;
+
+            border: 4px solid rgba(255, 255, 255, 0.12);
 
             box-shadow:
-                0 0 20px #ff4f81,
-                0 0 50px #ff4f81aa;
+                0 0 35px rgba(255, 0, 128, 0.35),
+                0 0 70px rgba(130, 0, 255, 0.2);
 
-            transition: .4s ease;
+            transition: 0.4s ease;
         }
 
         .profile img:hover {
-            transform: scale(1.06);
-
-            box-shadow:
-                0 0 30px #ff4f81,
-                0 0 80px #ff4f81aa;
+            transform: scale(1.05) rotate(2deg);
         }
-
-        /* =========================
-           JMÉNO
-        ========================= */
 
         .name {
             margin-top: 20px;
 
-            color: white;
-
-            font-size: 36px;
-            font-weight: bold;
-
-            letter-spacing: 3px;
-
-            text-shadow:
-                0 0 10px #ff4f81,
-                0 0 25px #ff4f81;
-        }
-
-        /* =========================
-           PROGRAMOVACÍ JAZYKY
-        ========================= */
-
-        .languages {
-            margin-top: 35px;
-
-            padding: 25px;
-
-            border: 1px solid #ff4f8155;
-            border-radius: 20px;
-
-            background: #ff4f8110;
-
-            box-shadow:
-                0 0 25px #ff4f8122;
-
-            text-align: left;
-        }
-
-        .languages-title {
-            text-align: center;
-
-            color: white;
-
-            font-size: 22px;
-            font-weight: bold;
-
-            margin-bottom: 25px;
-
-            text-shadow:
-                0 0 10px #ff4f81;
-        }
-
-        .language {
-            margin-bottom: 18px;
-        }
-
-        .language:last-child {
-            margin-bottom: 0;
-        }
-
-        .language-info {
-            display: flex;
-            justify-content: space-between;
-
-            margin-bottom: 7px;
-
-            color: white;
-
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .language-info span:last-child {
-            color: #ff6b9d;
-        }
-
-        .bar {
-            width: 100%;
-            height: 8px;
-
-            background: #ffffff12;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
+            font-size: 32px;
+            font-weight: 700;
 
             background: linear-gradient(
                 90deg,
-                #ff4f81,
-                #ff8fb3
+                #ff4da6,
+                #b56cff
             );
 
-            border-radius: 10px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .username {
+            margin-top: 3px;
+
+            color: rgba(255, 255, 255, 0.55);
+
+            font-size: 15px;
+        }
+
+        /* Songs */
+
+        .songs {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .song {
+            padding: 5px;
+
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(10px);
+
+            transition: 0.3s ease;
+        }
+
+        .song:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(255, 0, 128, 0.3);
 
             box-shadow:
-                0 0 10px #ff4f81;
-
-            animation: load 1.5s ease;
+                0 15px 40px rgba(0, 0, 0, 0.35);
         }
 
-        /* PROCENTA */
+        .song iframe {
+            display: block;
 
-        .lua {
-            width: 60%;
+            width: 100%;
+            height: 352px;
+
+            border: none;
+
+            border-radius: 12px;
         }
 
-        .python {
+        /* Third song centered */
+
+        .song:nth-child(3) {
+            grid-column: 1 / 3;
+
             width: 50%;
+
+            justify-self: center;
         }
 
-        .cpp {
-            width: 5%;
-        }
+        /* Animation */
 
-        .css {
-            width: 40%;
-        }
-
-        .html {
-            width: 25%;
-        }
-
-        @keyframes load {
+        @keyframes fadeIn {
             from {
-                width: 0;
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* =========================
-           MOBIL
-        ========================= */
+        /* Mobile */
 
-        @media (max-width: 500px) {
+        @media (max-width: 700px) {
+
+            body {
+                padding: 40px 15px;
+            }
+
+            .instagram {
+                top: 15px;
+                right: 15px;
+            }
 
             .profile {
-                transform: translateY(-40px);
+                margin-bottom: 30px;
             }
 
             .profile img {
-                width: 180px;
-                height: 180px;
+                width: 120px;
+                height: 120px;
             }
 
             .name {
-                font-size: 30px;
+                font-size: 27px;
             }
 
-            .languages {
-                padding: 20px;
-                margin-top: 25px;
+            .songs {
+                grid-template-columns: 1fr;
             }
 
-            .languages-title {
-                font-size: 20px;
+            .song:nth-child(3) {
+                grid-column: auto;
+                width: 100%;
             }
         }
     </style>
@@ -229,112 +261,119 @@
 
 <body>
 
-    <div class="profile">
+    <!-- Instagram -->
 
-        <!-- PROFILOVKA -->
+    <a
+        class="instagram"
+        href="https://www.instagram.com/kubiq.a/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+    >
 
-        <img src="pfp2.png" alt="Kuba">
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+            <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+            ></rect>
 
+            <circle
+                cx="12"
+                cy="12"
+                r="4"
+            ></circle>
 
-        <!-- JMÉNO -->
+            <circle
+                cx="17.5"
+                cy="6.5"
+                r="0.8"
+                fill="currentColor"
+            ></circle>
+        </svg>
 
-        <div class="name">
-            Kuba
-        </div>
-
-
-        <!-- PROGRAMOVACÍ JAZYKY -->
-
-        <div class="languages">
-
-            <div class="languages-title">
-                💻 Programovací jazyky
-            </div>
-
-
-            <!-- LUA -->
-
-            <div class="language">
-
-                <div class="language-info">
-                    <span>Lua</span>
-                    <span>60%</span>
-                </div>
-
-                <div class="bar">
-                    <div class="progress lua"></div>
-                </div>
-
-            </div>
-
-
-            <!-- PYTHON -->
-
-            <div class="language">
-
-                <div class="language-info">
-                    <span>Python</span>
-                    <span>50%</span>
-                </div>
-
-                <div class="bar">
-                    <div class="progress python"></div>
-                </div>
-
-            </div>
+    </a>
 
 
-            <!-- C++ -->
+    <main class="container">
 
-            <div class="language">
+        <!-- Profile -->
 
-                <div class="language-info">
-                    <span>C++</span>
-                    <span>5%</span>
-                </div>
+        <section class="profile">
 
-                <div class="bar">
-                    <div class="progress cpp"></div>
-                </div>
+            <img
+                src="pfp2.jpg"
+                alt="Profilová fotka Kuba"
+            >
 
-            </div>
+            <h1 class="name">
+                Kuba
+            </h1>
+
+            <p class="username">
+                @kuba
+            </p>
+
+        </section>
 
 
-            <!-- CSS -->
+        <!-- Songs -->
 
-            <div class="language">
+        <section class="songs">
 
-                <div class="language-info">
-                    <span>CSS</span>
-                    <span>40%</span>
-                </div>
+            <!-- Talk Sh!t -->
 
-                <div class="bar">
-                    <div class="progress css"></div>
-                </div>
+            <div class="song">
+
+                <iframe
+                    src="https://open.spotify.com/embed/track/5Gs73ar2LrvAgeNvS2fA1Y?utm_source=generator"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
 
             </div>
 
 
-            <!-- HTML -->
+            <!-- STFU -->
 
-            <div class="language">
+            <div class="song">
 
-                <div class="language-info">
-                    <span>HTML</span>
-                    <span>25%</span>
-                </div>
-
-                <div class="bar">
-                    <div class="progress html"></div>
-                </div>
+                <iframe
+                    src="https://open.spotify.com/embed/track/1ipAABlNuyDxSeaeTvjbVc?utm_source=generator"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
 
             </div>
 
-        </div>
 
-    </div>
+            <!-- Žijeme len raz -->
+
+            <div class="song">
+
+                <iframe
+                    src="https://open.spotify.com/embed/track/3vjZjq1a1kCmt4FWuDIiOJ?utm_source=generator"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </body>
 </html>
-```
