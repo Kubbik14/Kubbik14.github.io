@@ -29,7 +29,7 @@
             overflow: hidden;
         }
 
-        /* Instagram v pravém horním rohu */
+        /* Instagram */
         .instagram {
             position: fixed;
             top: 25px;
@@ -78,17 +78,26 @@
                 0 0 45px #ff4f8166;
         }
 
+        /* Hlavní profil */
         .profile {
             text-align: center;
             position: relative;
             z-index: 2;
 
-            transform: translateY(-90px);
+            transform: translate(70px, -60px);
+        }
+
+        /* Dvě profilové fotky vedle sebe */
+        .pfps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
         }
 
         .pfp {
-            width: 230px;
-            height: 230px;
+            width: 210px;
+            height: 210px;
 
             object-fit: cover;
             border-radius: 50%;
@@ -114,42 +123,6 @@
                 0 0 25px #ff4f81;
 
             animation: appear 1s ease;
-        }
-
-        .photos-button {
-            display: inline-block;
-
-            margin-top: 25px;
-            padding: 12px 32px;
-
-            color: white;
-            text-decoration: none;
-
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 1px;
-
-            border: 1px solid #ff6b9d88;
-            border-radius: 30px;
-
-            background: #ff6b9d18;
-
-            box-shadow:
-                0 0 15px #ff6b9d44;
-
-            transition: .3s ease;
-
-            animation: appear 1.3s ease;
-        }
-
-        .photos-button:hover {
-            transform: translateY(-4px) scale(1.03);
-
-            background: #ff6b9d33;
-
-            box-shadow:
-                0 0 20px #ff6b9d99,
-                0 0 40px #ff4f8155;
         }
 
         .heart {
@@ -223,14 +196,18 @@
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .profile {
-                transform: translateY(-60px);
+                transform: translate(0, -50px);
+            }
+
+            .pfps {
+                gap: 12px;
             }
 
             .pfp {
-                width: 190px;
-                height: 190px;
+                width: 155px;
+                height: 155px;
             }
 
             h1 {
@@ -271,6 +248,7 @@
 
     <div class="profile">
 
+        <!-- Srdíčka -->
         <span class="heart">♥</span>
         <span class="heart">♥</span>
         <span class="heart">♥</span>
@@ -278,17 +256,22 @@
         <span class="heart">♥</span>
         <span class="heart">♥</span>
 
-        <img
-            class="pfp"
-            src="pfp.png"
-            alt="Anet"
-        >
+        <!-- Dvě profilové fotky -->
+        <div class="pfps">
+            <img
+                class="pfp"
+                src="pfp.png"
+                alt="Anet"
+            >
+
+            <img
+                class="pfp"
+                src="pfp2.png"
+                alt="Anet"
+            >
+        </div>
 
         <h1>Anet</h1>
-
-        <a href="fotky.html" class="photos-button">
-            📸 Fotky
-        </a>
 
     </div>
 
