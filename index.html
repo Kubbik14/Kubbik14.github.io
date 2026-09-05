@@ -29,14 +29,35 @@
             overflow: hidden;
         }
 
-        /* Instagram */
-        .instagram {
-            position: fixed;
-            top: 25px;
-            right: 25px;
+        .profile {
+            text-align: center;
+            position: relative;
+            z-index: 2;
 
+            transform: translate(70px, -50px);
+        }
+
+        /* Všechny prvky kolem fotek */
+        .people {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 600px;
+        }
+
+        /* Osoba */
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+        }
+
+        /* Instagram tlačítko */
+        .instagram {
             width: 65px;
             height: 65px;
+
+            flex-shrink: 0;
 
             display: flex;
             justify-content: center;
@@ -52,7 +73,6 @@
                 0 0 35px #ff4f8144;
 
             transition: .3s ease;
-            z-index: 10;
         }
 
         .instagram svg {
@@ -65,7 +85,7 @@
         }
 
         .instagram:hover {
-            transform: translateY(-4px) scale(1.08);
+            transform: scale(1.1);
 
             background: #ff6b9d33;
 
@@ -74,26 +94,8 @@
                 0 0 45px #ff4f8166;
         }
 
-        /* Celý profil */
-        .profile {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-
-            transform: translate(70px, -50px);
-        }
-
-        /* Fotky hodně od sebe */
-        .pfps {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-
-            gap: 600px;
-        }
-
-        /* Jedna fotka + jméno */
-        .person {
+        /* Fotka + jméno */
+        .person-info {
             text-align: center;
         }
 
@@ -201,14 +203,18 @@
         }
 
         /* Mobil */
-        @media (max-width: 700px) {
+        @media (max-width: 900px) {
 
             .profile {
                 transform: translate(0, -40px);
             }
 
-            .pfps {
-                gap: 35px;
+            .people {
+                gap: 20px;
+            }
+
+            .person {
+                gap: 15px;
             }
 
             .pfp {
@@ -216,42 +222,41 @@
                 height: 150px;
             }
 
-            .name {
-                font-size: 25px;
-            }
-
             .instagram {
-                top: 18px;
-                right: 18px;
-
-                width: 58px;
-                height: 58px;
+                width: 52px;
+                height: 52px;
             }
 
             .instagram svg {
-                width: 34px;
-                height: 34px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .name {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .people {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .person {
+                gap: 20px;
+            }
+
+            .pfp {
+                width: 130px;
+                height: 130px;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Instagram -->
-    <a
-        href="https://www.instagram.com/anetous8/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="instagram"
-        aria-label="Instagram Anet"
-    >
-        <svg viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-            <circle cx="12" cy="12" r="4"></circle>
-            <circle cx="17.5" cy="6.5" r="1"></circle>
-        </svg>
-    </a>
 
     <div class="profile">
 
@@ -263,25 +268,68 @@
         <span class="heart">♥</span>
         <span class="heart">♥</span>
 
-        <!-- Dvě osoby -->
-        <div class="pfps">
 
+        <div class="people">
+
+            <!-- ANET -->
             <div class="person">
-                <img
-                    class="pfp"
-                    src="pfp.png"
-                    alt="Anet"
+
+                <!-- Instagram Anet vlevo -->
+                <a
+                    href="https://www.instagram.com/anetous8/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="instagram"
+                    aria-label="Instagram Anet"
                 >
-                <div class="name">Anet</div>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <circle cx="17.5" cy="6.5" r="1"></circle>
+                    </svg>
+                </a>
+
+                <div class="person-info">
+                    <img
+                        class="pfp"
+                        src="pfp.png"
+                        alt="Anet"
+                    >
+
+                    <div class="name">Anet</div>
+                </div>
+
             </div>
 
+
+            <!-- KUBA -->
             <div class="person">
-                <img
-                    class="pfp"
-                    src="pfp2.png"
-                    alt="Kuba"
+
+                <div class="person-info">
+                    <img
+                        class="pfp"
+                        src="pfp2.png"
+                        alt="Kuba"
+                    >
+
+                    <div class="name">Kuba</div>
+                </div>
+
+                <!-- Instagram Kuba vpravo -->
+                <a
+                    href="https://www.instagram.com/kubiq.a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="instagram"
+                    aria-label="Instagram Kuba"
                 >
-                <div class="name">Kuba</div>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <circle cx="17.5" cy="6.5" r="1"></circle>
+                    </svg>
+                </a>
+
             </div>
 
         </div>
