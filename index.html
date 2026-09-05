@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -28,11 +27,17 @@
         }
 
         .profile {
+            width: 420px;
+            max-width: 90%;
+
             text-align: center;
 
-            /* POSUN NAHORU */
-            transform: translateY(-100px);
+            transform: translateY(-60px);
         }
+
+        /* =========================
+           PROFILOVKA
+        ========================= */
 
         .profile img {
             width: 230px;
@@ -58,6 +63,10 @@
                 0 0 80px #ff4f81aa;
         }
 
+        /* =========================
+           JMÉNO
+        ========================= */
+
         .name {
             margin-top: 20px;
 
@@ -73,10 +82,128 @@
                 0 0 25px #ff4f81;
         }
 
+        /* =========================
+           PROGRAMOVACÍ JAZYKY
+        ========================= */
+
+        .languages {
+            margin-top: 35px;
+
+            padding: 25px;
+
+            border: 1px solid #ff4f8155;
+            border-radius: 20px;
+
+            background: #ff4f8110;
+
+            box-shadow:
+                0 0 25px #ff4f8122;
+
+            text-align: left;
+        }
+
+        .languages-title {
+            text-align: center;
+
+            color: white;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            margin-bottom: 25px;
+
+            text-shadow:
+                0 0 10px #ff4f81;
+        }
+
+        .language {
+            margin-bottom: 18px;
+        }
+
+        .language:last-child {
+            margin-bottom: 0;
+        }
+
+        .language-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .language-info span:last-child {
+            color: #ff6b9d;
+        }
+
+        .bar {
+            width: 100%;
+            height: 8px;
+
+            background: #ffffff12;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                #ff4f81,
+                #ff8fb3
+            );
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 10px #ff4f81;
+
+            animation: load 1.5s ease;
+        }
+
+        /* PROCENTA */
+
+        .lua {
+            width: 60%;
+        }
+
+        .python {
+            width: 50%;
+        }
+
+        .cpp {
+            width: 10%;
+        }
+
+        .css {
+            width: 40%;
+        }
+
+        .html {
+            width: 25%;
+        }
+
+        @keyframes load {
+            from {
+                width: 0;
+            }
+        }
+
+        /* =========================
+           MOBIL
+        ========================= */
+
         @media (max-width: 500px) {
 
             .profile {
-                transform: translateY(-70px);
+                transform: translateY(-40px);
             }
 
             .profile img {
@@ -87,6 +214,15 @@
             .name {
                 font-size: 30px;
             }
+
+            .languages {
+                padding: 20px;
+                margin-top: 25px;
+            }
+
+            .languages-title {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -95,10 +231,106 @@
 
     <div class="profile">
 
+        <!-- PROFILOVKA -->
+
         <img src="pfp2.png" alt="Kuba">
+
+
+        <!-- JMÉNO -->
 
         <div class="name">
             Kuba
+        </div>
+
+
+        <!-- PROGRAMOVACÍ JAZYKY -->
+
+        <div class="languages">
+
+            <div class="languages-title">
+                💻 Programovací jazyky
+            </div>
+
+
+            <!-- LUA -->
+
+            <div class="language">
+
+                <div class="language-info">
+                    <span>Lua</span>
+                    <span>60%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress lua"></div>
+                </div>
+
+            </div>
+
+
+            <!-- PYTHON -->
+
+            <div class="language">
+
+                <div class="language-info">
+                    <span>Python</span>
+                    <span>50%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress python"></div>
+                </div>
+
+            </div>
+
+
+            <!-- C++ -->
+
+            <div class="language">
+
+                <div class="language-info">
+                    <span>C++</span>
+                    <span>10%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress cpp"></div>
+                </div>
+
+            </div>
+
+
+            <!-- CSS -->
+
+            <div class="language">
+
+                <div class="language-info">
+                    <span>CSS</span>
+                    <span>40%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress css"></div>
+                </div>
+
+            </div>
+
+
+            <!-- HTML -->
+
+            <div class="language">
+
+                <div class="language-info">
+                    <span>HTML</span>
+                    <span>25%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="progress html"></div>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
