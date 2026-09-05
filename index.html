@@ -40,8 +40,6 @@
             padding: 50px 20px;
         }
 
-        /* Instagram */
-
         .instagram {
             position: fixed;
             top: 25px;
@@ -85,8 +83,6 @@
             height: 25px;
         }
 
-        /* Container */
-
         .container {
             width: 100%;
             max-width: 900px;
@@ -94,8 +90,6 @@
 
             animation: fadeIn 1s ease;
         }
-
-        /* Profile */
 
         .profile {
             display: flex;
@@ -110,7 +104,6 @@
             height: 145px;
 
             object-fit: cover;
-
             border-radius: 50%;
 
             border: 4px solid rgba(255, 255, 255, 0.12);
@@ -150,8 +143,6 @@
             font-size: 15px;
         }
 
-        /* Songs */
-
         .songs {
             display: grid;
 
@@ -186,18 +177,20 @@
                 0 15px 40px rgba(0, 0, 0, 0.35);
         }
 
+        /* Menší Spotify přehrávače */
+
         .song iframe {
             display: block;
 
             width: 100%;
-            height: 352px;
+            height: 152px;
 
             border: none;
 
             border-radius: 12px;
         }
 
-        /* Third song centered */
+        /* Třetí song uprostřed */
 
         .song:nth-child(3) {
             grid-column: 1 / 3;
@@ -206,8 +199,6 @@
 
             justify-self: center;
         }
-
-        /* Animation */
 
         @keyframes fadeIn {
             from {
@@ -220,8 +211,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Mobile */
 
         @media (max-width: 700px) {
 
@@ -306,7 +295,7 @@
 
     <main class="container">
 
-        <!-- Profile -->
+        <!-- Profil -->
 
         <section class="profile">
 
@@ -326,7 +315,7 @@
         </section>
 
 
-        <!-- Songs -->
+        <!-- Spotify -->
 
         <section class="songs">
 
