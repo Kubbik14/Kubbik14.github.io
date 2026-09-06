@@ -82,6 +82,68 @@
             width: 25px;
             height: 25px;
         }
+        .socials {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
+}
+
+.social svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.social:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.tiktok:hover {
+    box-shadow: 0 0 18px rgba(255, 0, 100, 0.5);
+}
+
+.spotify:hover {
+    box-shadow: 0 0 18px rgba(30, 215, 96, 0.5);
+}
+
+@media (max-width: 700px) {
+    .socials {
+        top: 15px;
+        right: 15px;
+        gap: 7px;
+    }
+
+    .social {
+        padding: 8px 10px;
+        font-size: 0;
+    }
+
+    .social svg {
+        width: 21px;
+        height: 21px;
+    }
+}
 
         .container {
             width: 100%;
@@ -255,7 +317,24 @@
         rel="noopener noreferrer"
         aria-label="Instagram"
     >
+    <!-- Sociální sítě -->
+<div class="socials">
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@kubbik14_" target="_blank" class="social tiktok" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-3.77V2h-3.35v13.38a2.67 2.67 0 1 1-2.67-2.67c.28 0 .55.04.8.12v-3.4a6.03 6.03 0 1 0 5.22 5.95V8.41a8.13 8.13 0 0 0 4.77 1.54V6.69h-1z"/>
+        </svg>
+        <span>@kubbik14_</span>
+    </a>
 
+    <!-- Spotify -->
+    <a href="https://open.spotify.com/user/31syoflr5pmr5z54bpnef5olywiq" target="_blank" class="social spotify" aria-label="Spotify">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 1.8a10.2 10.2 0 1 0 10.2 10.2A10.21 10.21 0 0 0 12 1.8zm4.68 14.71a.76.76 0 0 1-1.04.25 8.4 8.4 0 0 0-9.28-.47.76.76 0 1 1-.77-1.31 9.92 9.92 0 0 1 10.84.54.76.76 0 0 1 .25.99zm1.38-3.02a.95.95 0 0 1-1.3.31 10.72 10.72 0 0 0-10.91-.5.95.95 0 1 1-.91-1.67 12.62 12.62 0 0 1 12.82.59.95.95 0 0 1 .3 1.27zm.12-3.16a1.14 1.14 0 0 1-1.56.38 13.04 13.04 0 0 0-12.2-.54 1.14 1.14 0 1 1-.98-2.06 15.32 15.32 0 0 1 14.36.64 1.14 1.14 0 0 1 .38 1.58z"/>
+        </svg>
+        <span>Spotify</span>
+    </a>
+</div>
         <svg
             viewBox="0 0 24 24"
             fill="none"
