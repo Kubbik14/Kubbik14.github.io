@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Programovací jazyky</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,13 +22,22 @@
             color: white;
 
             background:
-                radial-gradient(circle at 15% 20%, rgba(255, 0, 128, 0.35), transparent 35%),
-                radial-gradient(circle at 85% 80%, rgba(121, 40, 255, 0.4), transparent 40%),
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 0, 128, 0.35),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(121, 40, 255, 0.4),
+                    transparent 40%
+                ),
                 #09000f;
 
             display: flex;
             justify-content: center;
             align-items: center;
+
             padding: 40px 20px;
         }
 
@@ -39,16 +50,46 @@
             text-align: center;
             font-size: 38px;
             margin-bottom: 40px;
+
+            text-shadow:
+                0 0 20px rgba(255, 0, 128, 0.25);
         }
 
         .language {
             margin-bottom: 25px;
+
+            opacity: 0;
+            transform: translateY(15px);
+
+            animation: showLanguage 0.7s ease forwards;
+        }
+
+        /* Postupné zobrazení jazyků */
+        .language:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .language:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        .language:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .language:nth-child(5) {
+            animation-delay: 0.55s;
+        }
+
+        .language:nth-child(6) {
+            animation-delay: 0.7s;
         }
 
         .language-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             margin-bottom: 9px;
         }
 
@@ -65,54 +106,106 @@
         .bar {
             width: 100%;
             height: 13px;
+
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
+
             border-radius: 20px;
             overflow: hidden;
+
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .progress {
             height: 100%;
+
             border-radius: 20px;
-            background: linear-gradient(90deg, #ff0080, #7928ff);
-            box-shadow: 0 0 18px rgba(255, 0, 128, 0.35);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff0080,
+                    #7928ff
+                );
+
+            box-shadow:
+                0 0 18px rgba(255, 0, 128, 0.35);
+
+            width: 0;
+
+            animation:
+                fillBar 1.5s cubic-bezier(0.22, 1, 0.36, 1)
+                forwards;
         }
 
         /* Procenta */
         .lua {
-            width: 60%;
+            --width: 60%;
+            animation-delay: 0.4s;
         }
 
         .python {
-            width: 50%;
+            --width: 50%;
+            animation-delay: 0.55s;
         }
 
         .html {
-            width: 25%;
+            --width: 25%;
+            animation-delay: 0.7s;
         }
 
         .css {
-            width: 20%;
+            --width: 20%;
+            animation-delay: 0.85s;
         }
 
         .cpp {
-            width: 7%;
+            --width: 7%;
+            animation-delay: 1s;
         }
 
+        @keyframes fillBar {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: var(--width);
+            }
+        }
+
+        @keyframes showLanguage {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tlačítko zpět */
         .back {
             display: block;
+
             width: fit-content;
+
             margin: 40px auto 0;
             padding: 11px 18px;
 
             color: white;
             text-decoration: none;
+
             font-size: 14px;
             font-weight: 600;
 
             background: rgba(255, 255, 255, 0.08);
+
             border: 1px solid rgba(255, 255, 255, 0.12);
+
             border-radius: 14px;
 
             backdrop-filter: blur(10px);
@@ -123,17 +216,47 @@
 
         .back:hover {
             transform: translateY(-3px);
-            background: linear-gradient(135deg, #ff0080, #7928ff);
-            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff0080,
+                    #7928ff
+                );
+
+            box-shadow:
+                0 10px 30px rgba(255, 0, 128, 0.3);
+        }
+
+        /* Hover efekt na progress baru */
+        .language:hover .progress {
+            filter: brightness(1.2);
+
+            box-shadow:
+                0 0 25px rgba(255, 0, 128, 0.55);
         }
 
         @media (max-width: 600px) {
+
+            body {
+                padding: 30px 15px;
+            }
+
             h1 {
                 font-size: 30px;
+                margin-bottom: 30px;
             }
 
             .language-name {
                 font-size: 15px;
+            }
+
+            .percentage {
+                font-size: 13px;
+            }
+
+            .bar {
+                height: 11px;
             }
         }
     </style>
@@ -145,64 +268,72 @@
 
         <h1>Programovací jazyky</h1>
 
-        <!-- 60% -->
+        <!-- 60 % -->
         <div class="language">
             <div class="language-header">
                 <span class="language-name">Lua</span>
                 <span class="percentage">60%</span>
             </div>
+
             <div class="bar">
                 <div class="progress lua"></div>
             </div>
         </div>
 
-        <!-- 50% -->
+        <!-- 50 % -->
         <div class="language">
             <div class="language-header">
                 <span class="language-name">Python</span>
                 <span class="percentage">50%</span>
             </div>
+
             <div class="bar">
                 <div class="progress python"></div>
             </div>
         </div>
 
-        <!-- 25% -->
+        <!-- 25 % -->
         <div class="language">
             <div class="language-header">
                 <span class="language-name">HTML</span>
                 <span class="percentage">25%</span>
             </div>
+
             <div class="bar">
                 <div class="progress html"></div>
             </div>
         </div>
 
-        <!-- 20% -->
+        <!-- 20 % -->
         <div class="language">
             <div class="language-header">
                 <span class="language-name">CSS</span>
                 <span class="percentage">20%</span>
             </div>
+
             <div class="bar">
                 <div class="progress css"></div>
             </div>
         </div>
 
-        <!-- 7% -->
+        <!-- 7 % -->
         <div class="language">
             <div class="language-header">
                 <span class="language-name">C++</span>
                 <span class="percentage">7%</span>
             </div>
+
             <div class="bar">
                 <div class="progress cpp"></div>
             </div>
         </div>
 
-        <a href="/" class="back">Zpět</a>
+        <a href="/" class="back">
+            Zpět
+        </a>
 
     </div>
 
 </body>
 </html>
+```
